@@ -1,21 +1,19 @@
 Messaging Fabric Errors
 ===
 
-<!--TODO(ale): can we specify an error message? Since error messages should be
-    used by the server (mandatory errors: certificate name mismatch -> login
-    failure), it would be nice to have a common format. Implementations could
-    later extend it.
--->
+*DISCUSS(ale):* can we specify an error message? Since error messages should be
+    used by the server (mandatory errors: certificate name mismatch during
+    registration), it would be nice to have a common format.
 
 The server must send an error message to the login requester client in case of
 certificate identity mismatch (refer to the [registration][1] section).
 
-<!-- TODO(ale): should we require any error message from clients? -->
+*DISCUSS(ale):* should we require any error message from clients?
 
 Error Message Format
 ---
 
-<!-- TODO(ale): check this - error format -->
+*DISCUSS(ale):* error format
 
 An error message must have the envelope *data_schema* entry equal to:
 

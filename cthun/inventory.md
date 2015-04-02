@@ -21,8 +21,8 @@ Inventory request and response messages must have the envelope *data_schema*
 entry respectively equal to `http://puppetlabs.com/inventoryrequestschema` and
 `http://puppetlabs.com/inventoryresponseschema`.
 
-<!-- TODO(ale): update this in case we decide to enable regex queries; it only
-    describes wildcarded URIs queries, as supported so far -->
+*TODO(ale):* update this in case we decide to enable regex queries; it only
+    describes wildcarded URIs queries, as supported so far
 
 For an inventory request, the data `content` must be a JSON document with a
 single *query* entry that specifies the types of nodes that the requester is
@@ -36,7 +36,7 @@ an unique *endpoints* entry, an array of strings where each item is a Cthun URI;
 Error Handling
 ---
 
-<!-- TODO(ale): the server must always reply to an inventory request? -->
+*DISCUSS(ale):* must the server always reply to an inventory request?
 
 In case of an error during the processing of the inventory list, the server must
 reply with an error message as described in the [error handling][2] section.

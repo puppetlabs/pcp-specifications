@@ -1,7 +1,7 @@
 Delivery of Client Node Messages
 ===
 
-<!-- TODO(ale): consider changing the name of this section -->
+*TODO(ale)* consider changing the name of this section
 
 In this section, we define the behavior of Cthun servers when delivering client
 node messages.
@@ -72,7 +72,7 @@ behavior.
 Server Operation
 ---
 
-<!-- TODO(ale): check everything here -->
+*DISCUSS(ale):* check everything here
 
 The server must discard a message in case of:
 
@@ -83,11 +83,11 @@ The server must discard a message in case of:
  message fabric; this include the case of wildcarded Cthun URIs with unknown
  node type
 
-<!-- TODO(ale): check error cases -->
+*TODO(ale):* check error cases
 
 In none of the above cases the server should reply with an error message.
 
-<!-- TODO(ale): mandatory or optional? -->
+*DISCUSS(ale):* should debug chunks be mandatory or optional?
 
 When a server processes a client message, it may add a debug chunk with a JSON
 `content` containing a *hops* entry that indicates the route the message has
@@ -100,8 +100,13 @@ following items:
 | time | string | time entry in ISO8601 format indicating when the processing took place
 | stage | string | type of processing (e.g. "accepted", "delivered")
 
-<!-- TODO(ale): add inter-server routing specs once we implement distribution
--->
+*TODO(ale):* list all possible values of a hop "stage" entry
+
+*TODO(ale):* add inter-server routing specs, if necessary once we implement
+      distribution
+
+*DISCUSS(ale):* anything to be added about queueing? Delivery guarantees?
+      Ordering?
 
 [1]: registration.md
 [2]: inventory.md

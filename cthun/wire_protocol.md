@@ -1,7 +1,7 @@
 Underlying Wire Protocol
 ===
 
-<!-- TODO(ale): check the following -->
+*TODO(ale):* check the following
 
 The Cthun messaging fabric requires an underlying wire protocol that enables
 data communication among nodes. Such protocol must:
@@ -14,8 +14,9 @@ data communication among nodes. Such protocol must:
  - provide secure connection by using SSL-based authentication; the SSL
  certificate infrastructure is used by the registration service
 
-<!-- TODO(ale): wire level compression? -->
-<!-- TODO(ale): anything about RBAC at this level? -->
+*DISCUSS(ale):* wire level compression?
+
+*DISCUSS(ale):* anything about RBAC at this level?
 
 There are no requirements regarding:
  - the transport mechanism

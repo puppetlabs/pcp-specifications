@@ -1,5 +1,6 @@
 Terminology
 ===
+
 <dl>
   <dt>Cthun Messaging Fabric</dt>
   <dd>communications system that provides functionalities such as: node presence registration (authentication, inventory) and message delivery (validation, queuing, routing, forwarding)</dd>
@@ -8,7 +9,7 @@ Terminology
   <dd>Cthun messaging fabric together with the set of client nodes that use it</dd>
 
   <dt>Command and Control (C&C)</dt>
-  <dd>system that provides a number of services for enabling the remote execution of commands, scripts, and pre-installed services</dd>
+  <dd>system that provides a number of services for enabling the remote execution of shell commands and scripts</dd>
 
   <dt>Node</dt>
   <dd>addressable entity (server or client node) that uses the Cthun communications protocol described in this document</dd>
@@ -17,22 +18,22 @@ Terminology
   <dd>text label that identifies the role of a given node within a Cthun framework (e.g. "agent" or "controller"); "server" is the reserved label for Cthun servers</dd>
 
   <dt>Server</dt>
-  <dd>Broker node that provides the messaging fabric capabilities</dd>
+  <dd>broker node that provides the messaging fabric capabilities</dd>
 
   <dt>Client Node</dt>
-  <dd>Node that uses the messaging fabric capabilities for communicating (with other client nodes) or requesting framework information (provided by a server node)</dd>
+  <dd>node that uses the messaging fabric capabilities for communicating (with other client nodes) or requesting framework information (provided by a server node)</dd>
 
   <dt>Uniform Resource Indicator (URI)</dt>
   <dd>String that identifies a node within a Cthun framework; URIs are used to address nodes</dd>
 
   <dt>Message</dt>
-  <dd>Data sent between nodes; it includes the actual payload, the metadata that enables the delivery, and debug information</dd>
+  <dd>data sent between nodes; it includes the actual payload, the metadata that enables the delivery, and debug information</dd>
 
   <dt>Message Delivery</dt>
-  <dd>The process of sending a message to a number of recipient nodes; also the related service provided by the messaging fabric</dd>
+  <dd>the process of sending a message to a number of recipient nodes; also the related service provided by the messaging fabric</dd>
 
   <dt>Transaction</dt>
-  <dd>Message exchange that enables a given Cthun framework functionality; it may occur at the messaging fabric layer (e.g. login messages exchange among a client/server pair to perform the registration of that client node) or at client layer (e.g. request/response exchange among client nodes to enable a certain C&C operation)</dd>
+  <dd>message exchange that enables a given Cthun framework functionality; it may occur at the messaging fabric layer (e.g. login messages exchange among a client/server pair to perform the registration of that client node) or at client layer (e.g. request/response exchange among client nodes to enable a certain C&C operation - see Cthun C&C specifications)</dd>
 
   <dt>Re-delivery</dt>
   <dd>the act of delivering a message after a failed attempt, that should be repeated until the message expires</dd>

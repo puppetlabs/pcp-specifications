@@ -1,24 +1,23 @@
 Introduction
 ===
 
-<!-- TODO(ale): organize this as it was meant for publishing a paper:
+*TODO(ale):* write abstract
     Messaging fabric - problem description ...
     What Cthun solves - solution description ...
     MCO and other messaging solutions; differences, improvements ...
     What is the Cthun communications layer ...
--->
 
 Actors
 ---
 
-<!-- TODO(ale): consider using broker instead of server -->
+*DISCISS(ale):* should we use "broker" instead of "server"?
 
 #### Server
 
 The Cthun server is the entity that provides messaging fabric capabilities. It
 offers the following services.
 
-<!-- TODO(ale): should we use the registration term? -->
+*DISCUSS(ale):* should we use "registration"?
 
 ##### Registration
 
@@ -58,21 +57,23 @@ The Cthun specification define the communications protocol used by the nodes
 within a Cthun framework. It covers the message syntax, Cthun URI format, the
 semantics of the services described above, and error handling.
 
-What is out of scope
----
+*TODO(ale):* protocol specs versioning
 
- - higher layer specifications (C&C) and implementation (modules - see
- [CthunAgent][3] repo)
+*TODO(ale):* client asynchronous API: connect, send, isConnected,
+    registerMessageCallback, monitorConnection
 
 What will come
 ---
 
  - RBAC
- - api (see [CthunClient][4] repo)
+ - client API specifications (see [CthunClient][3] and [clj-cthun-client][4]
+ repos)
  - distributed fabric / HA (multi server)
- - puppetdb integration, to improve the inventory service
+ - puppetdb integration (improve the inventory service)
+ - node classifier integration
+ - notify/subscribe & topics
 
 [1]: registration.md
 [2]: wire_protocol.md
 [3]: https://github.com/puppetlabs/cthun-agent
-[4]: https://github.com/puppetlabs/cthun-client
+[4]: https://github.com/puppetlabs/clj-cthun-client

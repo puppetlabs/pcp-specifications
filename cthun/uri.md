@@ -6,18 +6,18 @@ framework.
 
 The components of a Cthun URI are:
 
-<!--TODO(ale): do we need any notion of hostname here? We're on top of a wire
-    protocol. See the "Endpoints" section in Cthun doc-->
+*DISCUSS(ale):* see the "Endpoints" section in Cthun doc: do we need any notion
+    of hostname here? We're on top of a wire protocol.
 
-<!--TODO(ale): in the "Endpoints" section in Cthun doc we mention using the
-    connection ID in the "endpoint format"; do we need anything like that?-->
+*DISCUSS(ale):* in the "Endpoints" section in Cthun doc we mention using the
+    connection ID in the "endpoint format"; do we need anything like that?
 
 - *Cthun scheme name* `cth`, followed by a colon and a double slash
 - *Node identity* (e.g. "cthun_agent_RHEL_042")
 - *Node type* (e.g. "agent")
 
-<!--- TODO(ale): we are currently using cth://server to identify the server;
-    we should make it uniform with the format below -->
+*TODO(ale):* we are currently using cth://server to identify the server;
+    we should make it uniform with the format below
 
 The "server" label is reserved, as it indicates the node type of Cthun servers.
 
