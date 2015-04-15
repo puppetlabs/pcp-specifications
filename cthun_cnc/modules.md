@@ -4,7 +4,7 @@ Modules and Actions
 *TODO(ale):* formalize the agent concept
 
 Within the Cthun C&C layer, the services provided by agents are made available
-as actions ...
+as actions.
 
 *DISCUSS(ale):* CthunAgent allow loading external modules remotely
 
@@ -39,6 +39,7 @@ Requirements for External modules ...
 
 ##### Action Metadata
 
+*TODO*
 ...
 
 [1]: request_response.md

@@ -108,6 +108,11 @@ following items:
 *DISCUSS(ale):* anything to be added about queueing? Delivery guarantees?
       Ordering?
 
+*TODO(ale):* describe the endpoint response functionality: when requested by a
+      specific flag, the server should sends back to the requester client node a
+      (provisional) response message containing the list of actual recepient
+      nodes, as determined by the inventory service
+
 [1]: registration.md
 [2]: inventory.md
 [3]: message.md
