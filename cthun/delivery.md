@@ -127,7 +127,7 @@ following items:
 | stage | string | type of processing (e.g. "accepted", "delivered")
 
 When a server processes a client message and the *destination_report* flag is set
-the server must respond to the client with a message containing the list of URI's
+the server must respond to the client with a message containing the list of URIs
 it will be sending the message to in the Data Chunk.
 
 If we look at the example described in [Client to client messages](#client-to-client-messages),
