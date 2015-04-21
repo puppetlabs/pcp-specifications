@@ -1,60 +1,82 @@
 Terminology
 ===
-<dl>
-  <dt>Cthun Messaging Fabric</dt>
-  <dd>communications system that provides functionalities such as: node presence registration (authentication, inventory) and message delivery (validation, queuing, routing, forwarding)</dd>
 
-  <dt>Cthun Framework</dt>
-  <dd>Cthun messaging fabric together with the set of client nodes that use it</dd>
+### Cthun Framework
 
-  <dt>Command and Control (C&C)</dt>
-  <dd>system that provides a number of services for enabling the remote execution of commands, scripts, and pre-installed services</dd>
+communications system that provides capabilities such as: message delivery
+and inventory queries.
 
-  <dt>Node</dt>
-  <dd>addressable entity (server or client node) that uses the Cthun communications protocol described in this document</dd>
+### Client
 
-  <dt>Node type</dt>
-  <dd>text label that identifies the role of a given node within a Cthun framework (e.g. "agent" or "controller"); "server" is the reserved label for Cthun servers</dd>
+addressable entity that uses the Cthun communications protocol
+described in this document
 
-  <dt>Server</dt>
-  <dd>Broker node that provides the messaging fabric capabilities</dd>
+### Uniform Resource Indicator (URI)
 
-  <dt>Client Node</dt>
-  <dd>Node that uses the messaging fabric capabilities for communicating (with other client nodes) or requesting framework information (provided by a server node)</dd>
+String that identifies a client within a Cthun framework; URIs are used to address
+nodes and are made up of three parts, a scheme name, a common name and a type. For
+Example: cth://bob.com/controller
 
-  <dt>Uniform Resource Indicator (URI)</dt>
-  <dd>String that identifies a node within a Cthun framework; URIs are used to address nodes</dd>
+### Client common name
 
-  <dt>Message</dt>
-  <dd>Data sent between nodes; it includes the actual payload, the metadata that enables the delivery, and debug information</dd>
+The name of a client determined by the common name in a client certificate
 
-  <dt>Message Delivery</dt>
-  <dd>The process of sending a message to a number of recipient nodes; also the related service provided by the messaging fabric</dd>
+### Client type
 
-  <dt>Transaction</dt>
-  <dd>Message exchange that enables a given Cthun framework functionality; it may occur at the messaging fabric layer (e.g. login messages exchange among a client/server pair to perform the registration of that client node) or at client layer (e.g. request/response exchange among client nodes to enable a certain C&C operation)</dd>
+A text label that identifies the role of a given node within a Cthun framework.
+The "server" type is the reserved label for Cthun servers
 
-  <dt>Re-delivery</dt>
-  <dd>the act of delivering a message after a failed attempt, that should be repeated until the message expires</dd>
+### Server
 
-  <dt>Registration</dt>
-  <dd>service that processes login transactions and records the nodes that are currently registered to the messaging fabric, together with their wire connection states</dd>
+entity that provides inter client communication
 
-  <dt>Inventory</dt>
-  <dd>service that provides the list of nodes registered to the messaging fabric</dd>
+### Message
 
-  <dt>Schema</dt>
-  <dd>JSON schema used to validate the format of message parts</dd>
+data sent between nodes; it includes the actual payload, the metadata that
+enables the delivery, and debug information
 
-  <dt>Chunk</dt>
-  <dd>a segment of a Cthun message that consists of descriptor, size, and content fields</dd>
+### Message Delivery
 
-  <dt>Envelope Chunk</dt>
-  <dd>chunk that stores the message metadata</dd>
+the process of sending a message to a number of recipient nodes; also the
+related service provided by the messaging fabric
 
-  <dt>Data Chunk</dt>
-  <dd>chunk that stores the message payload</dd>
+### Transaction
 
-  <dt>Debug Chunk</dt>
-  <dd>chunk that stores debug information added by servers</dd>
-</dl>
+message exchange that enables a given Cthun framework functionality; it may
+occur at the messaging fabric layer (e.g. session associations) or at client
+layer (e.g. request/response exchange among client nodes to enable a certain C&C
+operation - see Cthun C&C specifications)
+
+### Re-delivery
+
+the act of delivering a message after a failed attempt, that should be repeated
+until the message expires
+
+### Session Association
+
+service that processes association transactions and records the clients that have
+sessions associated with the server, together with their wire connection states
+
+### Inventory
+
+service that provides the list of nodes registered to the messaging fabric
+
+### Schema
+
+JSON schema used to validate the format of message parts
+
+### Chunk
+
+a segment of a Cthun message that consists of descriptor, size, and content fields
+
+### Envelope Chunk
+
+chunk that stores the message metadata
+
+### Data Chunk
+
+chunk that stores the message payload
+
+### Debug Chunk
+
+chunk that stores debug information added by servers

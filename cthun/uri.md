@@ -1,31 +1,36 @@
 Cthun Uniform Resource Indicator
 ===
 
-A Cthun URI is a text string used to identify an addressable node within a Cthun
+A Cthun URI is a text string used to identify an addressable client within a Cthun
 framework.
-
-The components of a Cthun URI are:
-
-<!--TODO(ale): do we need any notion of hostname here? We're on top of a wire
-    protocol. See the "Endpoints" section in Cthun doc-->
-
-<!--TODO(ale): in the "Endpoints" section in Cthun doc we mention using the
-    connection ID in the "endpoint format"; do we need anything like that?-->
-
-- *Cthun scheme name* `cth`, followed by a colon and a double slash
-- *Node identity* (e.g. "cthun_agent_RHEL_042")
-- *Node type* (e.g. "agent")
-
-<!--- TODO(ale): we are currently using cth://server to identify the server;
-    we should make it uniform with the format below -->
-
-The "server" label is reserved, as it indicates the node type of Cthun servers.
 
 The Cthun URI format is:
 
-`cth://<node_identity>/<node_type>`
+`cth://<common_name>/<client_type>`
 
-It is possible to identify all nodes of a given type of a Cthun framework. That
-is done by replacing the *node name* with the asterisk wildcard symbol:
+The components of a Cthun URI are:
 
-`cth://*/<node_type>`
+- *Cthun scheme name* `cth`, followed by a colon and a double slash
+- *Common name* The name presented in the client's SSL certificate (e.g. bob.com)
+- *Client type* The type of the client (e.g. agent)
+
+The "server" label is reserved type, as it indicates the node type of Cthun servers.
+
+### Wildcard URI's
+
+When constructing URI's both the *Common name* and *Client type* fields can be
+replaced by a wild card. When an entity processes such a URI it must expand the
+wild card to include all clients.
+
+A URI that expands to all types of clients that present the *Common name* _bob.com_
+will look like:
+
+`cth://bob.com/*`
+
+A URI that expands to all clients that define their type as _agent_ will look like:
+
+`cth://*/agent`
+
+A URI that expands to all clients will look like:
+
+`cth://*/*`

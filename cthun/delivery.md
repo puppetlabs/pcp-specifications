@@ -1,93 +1,119 @@
-Delivery of Client Node Messages
+Message Delivery
 ===
 
-<!-- TODO(ale): consider changing the name of this section -->
+In this section, we define the behavior of Cthun servers when delivering messages.
 
-In this section, we define the behavior of Cthun servers when delivering client
-node messages.
+### Client to client messages
 
-Let us consider the following example of a request-response transaction between
-a pair of client nodes; the message flow is shown in the figure below:
+Consider the following example. client A and client B are connected to a server S.
+A is identified by the URI _cth://client_a/controller_ and B by _cth://client_b/agent_.
+A wishes to send a [message][3] via S to B.
 
 ```
     client A                    server S                    client B
        |                           |                           |
-       |        1 request          |                           |
+       |        1 message          |                           |
        |-------------------------->|                           |
        |                           | 2                         |
-       |                           |        3 request          |
+       |                           |        3 message          |
        |                           |-------------------------->|
-       |                           |                           |
-       |                           |                           | 4
-       |                           |        5 response         |
-       |                           |<--------------------------|
-       |                         6 |                           |
-       |        7 response         |                           |
-       |<--------------------------|                           |
-       |                           |                           |
 
 ```
 
-Both **A** and **B** are client nodes registered in the server **S**.
+**A** sends a message to **S**, specifying a single URI in the message envelope's
+*targets* field, _cth://client_b/agent_. (1)
 
-**A** wants to sends a request message to **B** as part of a C&C transaction.
-The C&C request *data_schema* has been previously defined and it is known to
-both client endpoints. The the data `content` of the request message conforms
-to the related schema definitions. Note that such transaction is not part of the
-Cthun specifications; it just relies on the messaging fabric capabilities.
+**S** receives the message from **A**, parses it and determines that it is valid.
+**S** inspects the *targets* field in the message envelope
+and prepares to deliver the message to each of the supplied URIs,
+_cth://client_b/agent_ in this particular case. (2)
 
-The request message sent by **A** includes only the Cthun URI of **B** in the
-*endpoints* entry of the envelope. **A** forwards such message to **S** which
-takes care of its delivery (1).
+**S** determines that the URI points to **B**. It then delivers the message to
+**B**. (3)
 
-**S** parses the request message. Both the overall message and the `envelope`
-chunk have a proper format. Also, the message is not expired, as indicated in
-the envelope *expires* entry. Thus, the message is a valid one.
+### Client to client messages using wildcards
 
-**S** inspects the *data_schema* entry of the `envelope`. It determines that the
-message must be delivered to the client node **B** since it is not a login nor
-an inventory request. Note that [registration][1] and [inventory][2] are the
-only existent client-server transactions, both defined in this document.
+Consider the following example. client A, client B and client C are connected to
+a server S. A is identified by the URI _cth://client_a/controller_, B by
+_cth://client_b/agent_ and C by _cth://client_c/agent_. A wishes to send a message
+to all clients of type agent.
 
-**B** is currently registered to **S**, so **S** can proceed with the delivery
-process; it adds a debug chunk with its *hops* entries (see the
-[Server Operation](#server_operation) section below) to the request message
-and forwards it directly to **B** (2). The wire layer connection is currently up
-and the message is successfully delivered to **B** (3).
+```
+    client A                server S                 client B                 client C
+       |                       |                       |                        |
+       |        1 message      |                       |                        |
+       |---------------------->|                       |                        |
+       |                       | 2                     |                        |
+       |                       |        3 message      |                        |
+       |                       |---------------------->|                        |
+       |                       |                                                |
+       |                       |                     4 message                  |
+       |                       |----------------------------------------------->|
+       |                                                                        |
 
-Once **B** receives the request message, it parses it and inspects the
-*data_schema* entry. **B**'s client implementation is able to process the data
-that uses the known C&C schema format. In this case, the process succeeds and a
-response message is created, with a C&C response *data_schema* entry. The
-message is addressed to **A** and forwarded to **S** (4).
+```
 
-The response message follows the same steps done by the request, but this time
-the message goes back to **A**.
+**A** sends a message to **S**, specifying a single URI in the message envelope's
+*targets* field, _cth://*/agent_. (1)
 
-In the above example, it is clear that Cthun servers must perform a number of
-operations to deliver a message. Below, we will formalize theier expected
-behavior.
+**S** receives the message from **A**, parses it and determines that it is valid.
+**S** inspects the *targets* field in the message envelope and determines that
+the URI _cth://*/agent_ contains a wildcard. The wildcard is expanded to include
+all clients that have specified their type as *agent*. (2)
 
-<a name="server_operation"/>
-Server Operation
----
+**S** determines that the expanded URI points to both **B** and **C**. It then
+delivers one copy of the message to both **B** and **C**. (3), (4)
 
-<!-- TODO(ale): check everything here -->
 
-The server must discard a message in case of:
+### Client to server messages
 
- - invalid format (see the [message][3] section)
- - invalid envelope `content` (see the [message][3] section)
- - expiration, as indicated in the *expires* envelope entry
- - none of the recipients of the *endpoints* envelope entry is registered in the
- message fabric; this include the case of wildcarded Cthun URIs with unknown
- node type
 
-<!-- TODO(ale): check error cases -->
+Consider the following example. client A is connected to a server S. A is identified
+by the URI _cth://client_a/controller_. A wishes to perform an inventory query and
+thus needs to send a message to S.
 
-In none of the above cases the server should reply with an error message.
+```
+    client A                    server S
+       |                           |
+       |        1 message          |
+       |-------------------------->|
+       |                           | 2
+       |        3 message          |
+       |<--------------------------|
 
-<!-- TODO(ale): mandatory or optional? -->
+```
+
+**A** sends a message to **S**, specifying a single URI in the message envelope's
+*targets* field, _cth:///server_. (1)
+
+**S** receives the message from **A**, parses it and determines that it is valid.
+**S** inspects the *targets* field in the message envelope and determines that
+the message was directed at itself.
+**S** performs a server specific task, determined by the value supplied in the
+*message_type* field in the [message][3] envelope.
+**S** constructs a resulting message and sends it to **A** using the URI supplied
+in the original message's *sender* field, _cth://client_a/contoller_. (2)
+
+From the above examples, it is clear that Cthun servers must perform a number of
+operations to deliver a message. Below, we will formalize their expected
+behavior. (3)
+
+### Server Operation
+
+The server must respond to a client with an [error message][3] in case of:
+
+- the message cannot be parsed (see [message][3])
+- the message envelope does not match the envelope schema (see [message][3])
+
+The server must discard a message in case where:
+
+ - a message expired, as indicated in the *expires* envelope entry
+
+The server will not take any action in the case where:
+
+ - none of the recipients of the *targets* envelope entry is registered in the
+ server; this include the case of wildcarded Cthun URIs that expand into nothing
+
 
 When a server processes a client message, it may add a debug chunk with a JSON
 `content` containing a *hops* entry that indicates the route the message has
@@ -100,9 +126,53 @@ following items:
 | time | string | time entry in ISO8601 format indicating when the processing took place
 | stage | string | type of processing (e.g. "accepted", "delivered")
 
-<!-- TODO(ale): add inter-server routing specs once we implement distribution
--->
+When a server processes a client message and the *destination_report* flag is set
+the server must respond to the client with a message containing the list of URIs
+it will be sending the message to in the Data Chunk.
 
-[1]: registration.md
+If we look at the example described in [Client to client messages](#client-to-client-messages),
+the flow of messages when the *destination_report* flag has been set will look as follows.
+
+
+
+```
+    client A                    server S                    client B
+       |                           |                           |
+       |        1 message          |                           |
+       |-------------------------->|                           |
+       |                           | 2                         |
+       |   3 destination report    |                           |
+       |<--------------------------|                           |
+       |                           |                           |
+       |                           |        4 message          |
+       |                           |-------------------------->|
+
+```
+
+The destination report is described by the following json-schema:
+
+```
+{
+    "properties" : {
+        "id" : { "type" : "string" },
+        "targets" : { "type" : "array",
+                      "items" : { "type" : "string",
+                                  "pattern" : "^cth://[^/]*/[^/]+$" }}
+    },
+    "required" : ["id", "targets"],
+    "additionalProperties" : false
+}
+```
+
+| name | type | description
+|------|------|------------
+| id | string | ID of the message with the *destination_report* flag set
+| targets | array | URIs of the recipient clients
+
+*TODO(ale):* add inter-server routing specs, if necessary once we implement
+      distribution
+
+[1]: association.md
 [2]: inventory.md
 [3]: message.md
+[4]: error_handling.md

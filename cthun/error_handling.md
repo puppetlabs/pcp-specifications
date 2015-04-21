@@ -1,28 +1,22 @@
-Messaging Fabric Errors
+Error Messages
 ===
 
-<!--TODO(ale): can we specify an error message? Since error messages should be
-    used by the server (mandatory errors: certificate name mismatch -> login
-    failure), it would be nice to have a common format. Implementations could
-    later extend it.
--->
+When an invalid message has been sent to a server or when [association][1] errors
+occur the server must respond with an error message.
 
-The server must send an error message to the login requester client in case of
-certificate identity mismatch (refer to the [registration][1] section).
+Error messages are described by the following json-schema:
 
-<!-- TODO(ale): should we require any error message from clients? -->
-
-Error Message Format
----
-
-<!-- TODO(ale): check this - error format -->
-
-An error message must have the envelope *data_schema* entry equal to:
-
-`http://puppetlabs.com/errorschema`
-
-The `content` of the data chunk must be a JSON document with the following
-entries:
+```
+{
+    "properties" : {
+        "id" : { "type" : "string" },
+        "message_type" : { "type" : "string" },
+        "description" : { "type" : "string" }
+    },
+    "required" : ["id", "message_type", "description"],
+    "additionalProperties" : false
+}
+```
 
 | name | type | description
 |------|------|------------
@@ -30,4 +24,8 @@ entries:
 | data_schema | string | data_schema of the received message that originated the error
 | description | string | error description
 
-[1]: registration.md
+An error message must have the envelope *message_type* entry equal to:
+
+`http://puppetlabs.com/errorschema`
+
+[1]: association.md
