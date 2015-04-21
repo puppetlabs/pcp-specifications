@@ -38,7 +38,7 @@ Association response messages are described by the following json-schema:
     "properties" : {
         "id" : { "type" : "string" },
         "success" : { "type" : "bool" },
-        "message" : { "type" : "string" }
+        "reason" : { "type" : "string" }
     },
     "required" : [id", "success"],
     "additionalProperties" : false
@@ -48,7 +48,7 @@ These fields are described as:
 
  - a *id* string entry set to the message id of the related request
  - a *success* boolean entry that indicates session association was successful
- - an optional *message* field may include the reason why a association failed
+ - an optional *reason* field may include the reason why a association failed
 
 <a name="error_handling"/>
 Error Handling
