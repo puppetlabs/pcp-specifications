@@ -36,17 +36,17 @@ Association response messages are described by the following json-schema:
 ```
 {
     "properties" : {
-        "request_id" : { "type" : "string" },
+        "id" : { "type" : "string" },
         "success" : { "type" : "bool" },
         "message" : { "type" : "string" }
     },
-    "required" : [request_id", "success"],
+    "required" : [id", "success"],
     "additionalProperties" : false
 }
 ```
 These fields are described as:
 
- - a *request_id* string entry set to the message id of the related request
+ - a *id* string entry set to the message id of the related request
  - a *success* boolean entry that indicates session association was successful
  - an optional *message* field may include the reason why a association failed
 
