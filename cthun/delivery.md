@@ -154,15 +154,20 @@ The destination report is described by the following json-schema:
 ```
 {
     "properties" : {
-        "message" : { "type" : "string" }
+        "id" : { "type" : "string" },
         "targets" : { "type" : "array",
                       "items" : { "type" : "string",
                                   "pattern" : "^cth://[^/]*/[^/]+$" }}
     },
-    "required" : ["message", "targets"],
+    "required" : ["id", "targets"],
     "additionalProperties" : false
 }
 ```
+
+| name | type | description
+|------|------|------------
+| id | string | ID of the message with the *destination_report* flag set
+| targets | array | URIs of the recipient clients
 
 *TODO(ale):* add inter-server routing specs, if necessary once we implement
       distribution
