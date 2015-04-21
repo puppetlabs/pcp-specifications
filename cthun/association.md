@@ -70,7 +70,7 @@ reply with an error message, as described in the above section.
 
 In case the underlying wire connection drops, the server must guarantee that the
 client will be disassociated, meaning that the client URI will no longer map to
-its underlying websocket connection.
+its underlying connection (e.g. WebSocket connection).
 
 The server must keep track of the associated clients and must be
 able to obtain the current status of their wire connections. That is necessary
