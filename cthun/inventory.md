@@ -18,8 +18,8 @@ Inventory Messages
 ---
 
 Inventory request and response messages must have the envelope *data_schema*
-entry respectively equal to `http://puppetlabs.com/inventoryrequestschema` and
-`http://puppetlabs.com/inventoryresponseschema`.
+entry respectively equal to `http://puppetlabs.com/inventory_request` and
+`http://puppetlabs.com/inventory_response`.
 
 *TODO(ale):* update this in case we decide to enable regex queries; it only
     describes wildcarded URIs queries, as supported so far
