@@ -20,7 +20,7 @@ specification used by the message.
 
 Every Cthun message must contain one and only one envelope chunk.
 
-The [content][#chunk-format] of an envelope is a JSON document that must match the following
+The [content](#chunk-format) of an envelope is a JSON document that must match the following
 json-schema:
 
 ```
@@ -54,13 +54,13 @@ json-schema:
 ### Data Chunk
 
 Data chunks are optional, but a message must not contain more than one. The type
-and and structure of the data chunk [content][#chunk-format] is determined by the *message_type*
+and and structure of the data chunk [content](#chunk-format) is determined by the *message_type*
 entry of the envelope.
 
 ### Debug Chunk
 
 A message may have zero or multiple debug chunks. Debug chunks are appended to the
-back of the message by either clients or servers, and their [content][#chunk-format]
+back of the message by either clients or servers, and their [content](#chunk-format)
 is described by the following json-schema.
 
 ```
