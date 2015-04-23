@@ -34,3 +34,11 @@ A URI that expands to all clients that define their type as _agent_ will look li
 A URI that expands to all clients will look like:
 
 `cth://*/*`
+
+### Server addressing
+
+A client may address the server it is currently correct to by using the short
+hand:
+
+`cth:///server`
+
