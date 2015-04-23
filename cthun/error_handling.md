@@ -12,7 +12,7 @@ Error messages are described by the following json-schema:
         "id" : { "type" : "string" },
         "description" : { "type" : "string" }
     },
-    "required" : [description"],
+    "required" : ["description"],
     "additionalProperties" : false
 }
 ```
