@@ -29,9 +29,10 @@ An inventory request message is decribed by the following json-schema:
 ```
 {
     "properties" : {
-        "query" : { "type" : "string",
-                    "pattern" : "^cth://[^/]*/[^/]+$" },
-
+        "query" : { "type" : "array",
+                    "items" : { "type" : "string",
+                                "pattern" : "^cth://[^/]*/[^/]+$" }
+        }
     },
     "required" : ["query"],
     "additionalProperties" : false
