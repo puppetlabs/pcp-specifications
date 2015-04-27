@@ -65,13 +65,26 @@ is described by the following json-schema.
 
 ```
 {
+    "type" : "object",
     "properties" : {
-        "server" : { "type" : "string",
-                     "pattern" : "^cth://[^/]*/[^/]+$" },
-        "stage" : { "type" : "string" },
-        "time" : { "type" : "string" }
-    },
-    "required" : ["server", "stage", "time"],
+        "hops" : {
+            "type" : "array",
+            "items" : {
+                "type": "object",
+                "properties" : {
+                    "server" : {
+                        "type" : "string",
+                        "pattern" : "^cth://[^/]*/[^/]+$"
+                    },
+                    "stage" : { "type" : "string" },
+                    "time" : { "type" : "string" }
+                },
+                "required" : ["server", "time"],
+                "additionalProperties" : false
+            }
+        }
+    }
+    "required": ["hops"],
     "additionalProperties" : false
 }
 ```
