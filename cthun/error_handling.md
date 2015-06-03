@@ -1,6 +1,8 @@
 Error Messages
 ===
 
+*TODO(ale):* revisit this; error messages are also sent by agents
+
 When an invalid message has been sent to a server the server must respond with
 an error message.
 
@@ -25,5 +27,3 @@ Error messages are described by the following json-schema:
 An error message must have the envelope *message_type* entry equal to:
 
 `http://puppetlabs.com/error_message`
-
-[1]: association.md
