@@ -35,15 +35,9 @@ response message containing its outcome after its execution completes
 
 ### Non-blocking action
 
-action for which the agent replies with a response message containing a pointer
-to the action outcome; the response is sent as soon as the action execution
-starts and the outcome will be made available successively by the *status*
-action
-
-### Status Action
-
-action that implements the *status query* capability, by which an agent provides
-the status of a non-blocking action; it also provides the action outcome, once
-the action execution is completed
+action for which the agent replies with a provisional response message
+containing a pointer to the action outcome as soon as the action execution
+starts; when the action terminates, its outcome will be sent back to the
+controller in case it requested that by flagging the *notify_outcome* field
 
 [1]: ../cthun/terminology.md
