@@ -57,20 +57,10 @@ start.
        |                           |   |
        |                           |   |
        |                           |   |
-       |       status request      |   |
-     4 |-------------------------->|   |
-       |       status response     |   |
-       |<--------------------------| 5 |
        |                           |   |
        |                           |   |
-       |    `puppet run` response  |   V 6
-     7 |<--------------------------|
-       |                           |
-       |                           |
-       |       status request      |
-     8 |-------------------------->|
-       |       status response     |
-       |<--------------------------| 9
+       |    `puppet run` response  |   V 4
+     5 |<--------------------------|
        |                           |
 ```
 
@@ -78,22 +68,11 @@ start.
 the request message, **A** starts the requested action (2) and immediately sends
 back to **C** a *provisional response* containing the action job ID (3).
 
-**C** waits for some time and he wants to make sure that job is still executing;
-he sends a *status request* to **A** in which he specifies the `puppet run` job
-ID contained in the *provisional response* (4).  **A** receives the
-*status request* and checks the progress of the job; `puppet run` is still
-executing so **A** replies with a *status response* by stating that the
-requested job status is "running" (5); refer to the [status][2] section.
-
-The `puppet run` job terminates (6) and, since **C** requested to be notified
+The `puppet run` job terminates (4) and, since **C** requested to be notified
 with the outcome of the job (*notify_outcome* was flagged in the
 *non-blocking request* message), **A** sends back to **C** a
 *non-blocking response* containing the job output and possible errors of the
-executed action (7).
-
-At this point, in case of another *status request* for the executed `puppet run`
-job (8), **A** will reply with a *status response* (9) containing its outcome
-(again, refer to the [status][2] section).
+executed action (5).
 
 ### Message types
 
@@ -270,4 +249,3 @@ The controller error handling operation should handle messages at both RPC and
 Cthun protocol layer, by covering the above cases.
 
 [1]: ../cthun/error_handling.md
-[2]: status.md

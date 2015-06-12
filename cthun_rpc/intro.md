@@ -9,6 +9,5 @@ In this document we describe:
 
  - actions
  - request/response transactions
- - the status action
 
 *TODO(ale):* update if we enable Pegasus run/bundle/play over Cthun
