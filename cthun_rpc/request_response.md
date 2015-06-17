@@ -208,8 +208,6 @@ and, in case of success, provides the job identifier.
 
 ### Error Message
 
-*DISCUSS(ale):* is "id" useful?
-
 An *RPC error message* follows the structure of Cthun Error messages, as
 described [here][1], plus the mandatory *transaction_id* field. The
 *message_type* is the one specified above. The format is:
