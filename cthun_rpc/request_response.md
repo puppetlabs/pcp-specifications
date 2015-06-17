@@ -119,16 +119,17 @@ messages.
 
 ##### Blocking Response
 
-The data content of a *response message* is specific for a given action; the
-*transaction_id* is the only mandatory entry. The schema is:
+The results of the requested action should be included in the *results* object;
+its schema is action-specific. *transaction_id* is the other required entry.
 
 ```
 {
     "properties" : {
-        "transaction_id" : { "type" : "string" }
+        "transaction_id" : { "type" : "string" },
+        "results" : { "type" : "object" }
     },
-    "required" : ["transaction_id"],
-    "additionalProperties" : true
+    "required" : ["transaction_id", "results"],
+    "additionalProperties" : false
 }
 ```
 
@@ -162,17 +163,19 @@ The data content of a *response message* is specific for a given action; the
 
 ##### Non-blocking Response
 
-The data content of a *response message* is specific for a given action;
-*transaction_id* and *job_id* are the only mandatory entries.
+The results of the requested action should be included in the *results* object;
+its schema is action-specific. *transaction_id* and *job_id* are the other
+required entries.
 
 ```
 {
     "properties" : {
         "transaction_id" : { "type" : "string" },
-        "job_id" : { "type" : "string" }
+        "job_id" : { "type" : "string" },
+        "results" : { "type" : "object" }
     },
-    "required" : ["transaction_id", "job_id"],
-    "additionalProperties" : true
+    "required" : ["transaction_id", "job_id", "results"],
+    "additionalProperties" : false
 }
 ```
 
