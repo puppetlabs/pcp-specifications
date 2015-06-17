@@ -136,6 +136,7 @@ its schema is action-specific. *transaction_id* is the other required entry.
 | name | type | description
 |------|------|------------
 | transaction_id | string | free format id of the request/response transaction
+| results | object | action results in action-specific format
 
 ##### Non-blocking Request
 
@@ -183,6 +184,7 @@ required entries.
 |------|------|------------
 | transaction_id | string | free format id of the request/response transaction
 | job_id | string | reference to the execution job of the requested action
+| results | object | action results in action-specific format
 
 ##### Provisional Response
 
