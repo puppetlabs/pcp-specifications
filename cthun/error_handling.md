@@ -1,8 +1,6 @@
 Error Messages
 ===
 
-*TODO(ale):* revisit this; error messages are also sent by agents
-
 When an invalid message has been sent to a server the server must respond with
 an error message.
 
