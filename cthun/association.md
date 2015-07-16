@@ -19,6 +19,10 @@ In case the request is processed successfully, the server will reply with a
 *error message* in case of node identity mismatch (see
 [Server Operation](#server_operation)).
 
+Should a connection already be associated with the given client URI the server
+should disconnect the older connection, and consider the newly-assocated
+session to be authoritative for that URI.
+
 Associate Messages
 ---
 
