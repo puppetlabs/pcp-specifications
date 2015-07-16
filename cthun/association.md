@@ -33,14 +33,14 @@ require a Data Chunk.
 
 Association response messages are described by the following json-schema:
 
-```
+```json
 {
     "properties" : {
         "id" : { "type" : "string" },
         "success" : { "type" : "bool" },
         "reason" : { "type" : "string" }
     },
-    "required" : [id", "success"],
+    "required" : [ "id", "success" ],
     "additionalProperties" : false
 }
 ```
