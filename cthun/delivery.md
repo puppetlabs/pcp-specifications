@@ -107,6 +107,18 @@ containing the list of URIs it will be sending the message to in the Data Chunk.
 The *destination_report* flag is ignored in case of [inventory requests][2],
 which are addressed directly to the server.
 
+#### Acknowledgment
+
+The server must [acknowledge][7] all messages that it receives.
+
+#### Retransmission
+
+The server must retransmit messages that were not acknowledged during a certain
+interval after a delivery attempt. Retransmissions must be retried until
+messages don't expire.
+
+*TODO(ale):* retransmission timer
+
 #### Error handling
 
 The server must respond to a client with an [error message][4] in case:
@@ -140,3 +152,4 @@ following items:
 [3]: message.md
 [4]: error_handling.md
 [5]: destination_report.md
+[7]: ack.md
