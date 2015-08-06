@@ -107,18 +107,19 @@ containing the list of URIs it will be sending the message to in the Data Chunk.
 The *destination_report* flag is ignored in case of [inventory requests][2],
 which are addressed directly to the server.
 
+#### Error handling
+
+The server must respond to a client with an [error message][4] in case:
+
 - the message cannot be parsed (see [message][3])
 - the message envelope does not match the envelope schema (see [message][3])
-
-The server must discard a message in case where:
-
- - a message expired, as indicated in the *expires* envelope entry
 
 The server will not take any action in the case where:
 
  - none of the recipients of the *targets* envelope entry is registered in the
  server; this include the case of wildcarded Cthun URIs that expand into nothing
 
+#### Debug data
 
 When a server processes a client message, it may add a debug chunk with a JSON
 `content` containing a *hops* entry that indicates the route the message has
