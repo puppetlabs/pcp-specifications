@@ -98,6 +98,15 @@ From the above examples, it is clear that Cthun servers must perform a number of
 operations to deliver a message. In this section we describe the operation
 requirements for the server.
 
+#### Destination report
+
+When the server processes a client message and the *destination_report* flag is
+set, it must respond to the client with a [destination report message][5]
+containing the list of URIs it will be sending the message to in the Data Chunk.
+
+The *destination_report* flag is ignored in case of [inventory requests][2],
+which are addressed directly to the server.
+
 - the message cannot be parsed (see [message][3])
 - the message envelope does not match the envelope schema (see [message][3])
 
@@ -122,49 +131,6 @@ following items:
 | time | string | time entry in ISO8601 format indicating when the processing took place
 | stage | string | type of processing (e.g. "accepted", "delivered")
 
-When a server processes a client message and the *destination_report* flag is set
-the server must respond to the client with a message containing the list of URIs
-it will be sending the message to in the Data Chunk.
-
-If we look at the example described in [Client to client messages](#client-to-client-messages),
-the flow of messages when the *destination_report* flag has been set will look as follows.
-
-
-
-```
-    client A                    server S                    client B
-       |                           |                           |
-       |        1 message          |                           |
-       |-------------------------->|                           |
-       |                           | 2                         |
-       |   3 destination report    |                           |
-       |<--------------------------|                           |
-       |                           |                           |
-       |                           |        4 message          |
-       |                           |-------------------------->|
-
-```
-
-The destination report is described by the following json-schema:
-
-```
-{
-    "properties" : {
-        "id" : { "type" : "string" },
-        "targets" : { "type" : "array",
-                      "items" : { "type" : "string",
-                                  "pattern" : "^cth://[^/]*/[^/]+$" }}
-    },
-    "required" : ["id", "targets"],
-    "additionalProperties" : false
-}
-```
-
-| name | type | description
-|------|------|------------
-| id | string | ID of the message with the *destination_report* flag set
-| targets | array | URIs of the recipient clients
-
 *TODO(ale):* add inter-server routing specs, if necessary once we implement
       distribution
 
@@ -172,3 +138,4 @@ The destination report is described by the following json-schema:
 [2]: inventory.md
 [3]: message.md
 [4]: error_handling.md
+[5]: destination_report.md
