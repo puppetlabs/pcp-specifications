@@ -107,6 +107,11 @@ containing the list of URIs it will be sending the message to in the Data Chunk.
 The *destination_report* flag is ignored in case of [inventory requests][2],
 which are addressed directly to the server.
 
+#### Message Expiration
+
+The server must notify the sender of an expired message with a [TTL expired][6]
+message.
+
 #### Error handling
 
 The server must respond to a client with an [error message][4] in case:
@@ -140,3 +145,4 @@ following items:
 [3]: message.md
 [4]: error_handling.md
 [5]: destination_report.md
+[6]: ttl_expired.md
