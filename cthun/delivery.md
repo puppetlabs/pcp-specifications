@@ -21,15 +21,15 @@ A wishes to send a [message][3] via S to B.
 ```
 
 **A** sends a message to **S**, specifying a single URI in the message envelope's
-*targets* field, _cth://client_b/agent_. (1)
+*targets* field, _cth://client_b/agent_ (1).
 
 **S** receives the message from **A**, parses it and determines that it is valid.
 **S** inspects the *targets* field in the message envelope
 and prepares to deliver the message to each of the supplied URIs,
-_cth://client_b/agent_ in this particular case. (2)
+_cth://client_b/agent_ in this particular case (2).
 
 **S** determines that the URI points to **B**. It then delivers the message to
-**B**. (3)
+**B** (3).
 
 ### Client to client messages using wildcards
 
@@ -64,13 +64,11 @@ all clients that have specified their type as *agent*. (2)
 **S** determines that the expanded URI points to both **B** and **C**. It then
 delivers one copy of the message to both **B** and **C**. (3), (4)
 
-
 ### Client to server messages
 
-
-Consider the following example. client A is connected to a server S. A is identified
+Consider the following example. Client A is connected to a server S. A is identified
 by the URI _cth://client_a/controller_. A wishes to perform an inventory query and
-thus needs to send a message to S.
+thus needs to send a message to S (refer to the [inventory][2] section).
 
 ```
     client A                    server S
@@ -84,36 +82,44 @@ thus needs to send a message to S.
 ```
 
 **A** sends a message to **S**, specifying a single URI in the message envelope's
-*targets* field, _cth:///server_. (1)
+*targets* field, _cth:///server_ (1).
 
 **S** receives the message from **A**, parses it and determines that it is valid.
 **S** inspects the *targets* field in the message envelope and determines that
 the message was directed at itself.
 **S** performs a server specific task, determined by the value supplied in the
-*message_type* field in the [message][3] envelope.
+*message_type* field in the [message][3] envelope (2).
 **S** constructs a resulting message and sends it to **A** using the URI supplied
-in the original message's *sender* field, _cth://client_a/contoller_. (2)
-
-From the above examples, it is clear that Cthun servers must perform a number of
-operations to deliver a message. Below, we will formalize their expected
-behavior. (3)
+in the original message's *sender* field, _cth://client_a/contoller_ (3).
 
 ### Server Operation
 
-The server must respond to a client with an [error message][3] in case of:
+From the above examples, it is clear that Cthun servers must perform a number of
+operations to deliver a message. In this section we describe the operation
+requirements for the server.
+
+#### Destination report
+
+When the server processes a client message and the *destination_report* flag is
+set, it must respond to the client with a [destination report message][5]
+containing the list of URIs it will be sending the message to in the Data Chunk.
+
+The *destination_report* flag is ignored in case of [inventory requests][2],
+which are addressed directly to the server.
+
+#### Error handling
+
+The server must respond to a client with an [error message][4] in case:
 
 - the message cannot be parsed (see [message][3])
 - the message envelope does not match the envelope schema (see [message][3])
-
-The server must discard a message in case where:
-
- - a message expired, as indicated in the *expires* envelope entry
 
 The server will not take any action in the case where:
 
  - none of the recipients of the *targets* envelope entry is registered in the
  server; this include the case of wildcarded Cthun URIs that expand into nothing
 
+#### Debug data
 
 When a server processes a client message, it may add a debug chunk with a JSON
 `content` containing a *hops* entry that indicates the route the message has
@@ -126,49 +132,6 @@ following items:
 | time | string | time entry in ISO8601 format indicating when the processing took place
 | stage | string | type of processing (e.g. "accepted", "delivered")
 
-When a server processes a client message and the *destination_report* flag is set
-the server must respond to the client with a message containing the list of URIs
-it will be sending the message to in the Data Chunk.
-
-If we look at the example described in [Client to client messages](#client-to-client-messages),
-the flow of messages when the *destination_report* flag has been set will look as follows.
-
-
-
-```
-    client A                    server S                    client B
-       |                           |                           |
-       |        1 message          |                           |
-       |-------------------------->|                           |
-       |                           | 2                         |
-       |   3 destination report    |                           |
-       |<--------------------------|                           |
-       |                           |                           |
-       |                           |        4 message          |
-       |                           |-------------------------->|
-
-```
-
-The destination report is described by the following json-schema:
-
-```
-{
-    "properties" : {
-        "id" : { "type" : "string" },
-        "targets" : { "type" : "array",
-                      "items" : { "type" : "string",
-                                  "pattern" : "^cth://[^/]*/[^/]+$" }}
-    },
-    "required" : ["id", "targets"],
-    "additionalProperties" : false
-}
-```
-
-| name | type | description
-|------|------|------------
-| id | string | ID of the message with the *destination_report* flag set
-| targets | array | URIs of the recipient clients
-
 *TODO(ale):* add inter-server routing specs, if necessary once we implement
       distribution
 
@@ -176,3 +139,4 @@ The destination report is described by the following json-schema:
 [2]: inventory.md
 [3]: message.md
 [4]: error_handling.md
+[5]: destination_report.md

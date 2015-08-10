@@ -14,10 +14,11 @@ Index
 - [URI][21] - Cthun URI format
 
 ##### Semantics
-- [Session Association][30] - initialise connections and associate sessions
-- [Inventory][31] - inventory service and transaction
-- [Message Delivery][32] - how the fabric processes and delivers client messages
-- [Error Handling][33] - error handling
+- [Session Association][31] - initialise connections and associate sessions
+- [Inventory][32] - inventory service and transaction
+- [Message Delivery][33] - how the fabric processes and delivers client messages
+- [Destination Report][34] - how the fabric reports the receivers of a message
+- [Error Handling][35] - error handling
 
 Implementations
 ----
@@ -25,7 +26,7 @@ Implementations
 The following projects follow the Cthun specifications described here, using
 WebSockets as the underlying wire protocol.
 
-*DISCUSS(ale):* rename repos: cthun-server? pegasus? cpp / clj suffixes?
+*TODO(ale):* rename repos
 
  - [cthun][41] provides a Cthun server implementation in Clojure
  - [cthun-client][42] is a Cthun client library written in C++
@@ -41,10 +42,11 @@ WebSockets as the underlying wire protocol.
 [12]: wire_protocol.md
 [20]: message.md
 [21]: uri.md
-[30]: association.md
-[31]: inventory.md
-[32]: delivery.md
-[33]: error_handling.md
+[31]: association.md
+[32]: inventory.md
+[33]: delivery.md
+[34]: destination_report.md
+[35]: error_handling.md
 [41]: https://github.com/puppetlabs/cthun
 [42]: https://github.com/puppetlabs/cthun-client
 [43]: https://github.com/puppetlabs/cthun-agent
