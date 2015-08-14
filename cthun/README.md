@@ -31,12 +31,10 @@ WebSockets as the underlying wire protocol.
 
  - [cthun][41] provides a Cthun server implementation in Clojure
  - [cthun-client][42] is a Cthun client library written in C++
- - [cthun-agent][43] is a C&C agent, based on CthunClient
- - [pegasus][44] is a C&C tool that can be used as a controller node; it
- also relies on CthunClient
- - [clj-cthun-message][45] is a library for processing Cthun messages written in
+ - [cthun-agent][43] is an agent used to run puppet, based on CthunClient
+ - [clj-cthun-message][44] is a library for processing Cthun messages written in
  Clojure
- - [clj-cthun-client][46] is a Cthun client Clojure library written in Clojure
+ - [clj-cthun-client][45] is a Cthun client Clojure library written in Clojure
 
 [10]: intro.md
 [11]: terminology.md
@@ -52,6 +50,5 @@ WebSockets as the underlying wire protocol.
 [41]: https://github.com/puppetlabs/cthun
 [42]: https://github.com/puppetlabs/cthun-client
 [43]: https://github.com/puppetlabs/cthun-agent
-[44]: https://github.com/puppetlabs/pegasus
-[45]: https://github.com/puppetlabs/clj-cthun-message
-[46]: https://github.com/puppetlabs/clj-cthun-client
+[44]: https://github.com/puppetlabs/clj-cthun-message
+[45]: https://github.com/puppetlabs/clj-cthun-client

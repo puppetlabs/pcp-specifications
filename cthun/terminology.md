@@ -44,8 +44,7 @@ related service provided by the messaging fabric
 
 message exchange that enables a given Cthun framework functionality; it may
 occur at the messaging fabric layer (e.g. session associations) or at client
-layer (e.g. request/response exchange among client nodes to enable a certain C&C
-operation - see Cthun C&C specifications)
+layer (e.g. request/response exchange among client nodes)
 
 ### Re-delivery
 
