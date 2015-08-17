@@ -18,7 +18,6 @@ the action outcome is available (*notify_outcome* flag); refer to the
 [Request Response][1] section for a detailed description of the transaction
 workflow for both *blocking* and *non-blocking* actions.
 
-*TODO(ale)*: describe action metadata and external modules after Pegasus changes
-for PEG-164
+*TODO(ale)*: describe action metadata and external modules
 
 [1]: request_response.md
