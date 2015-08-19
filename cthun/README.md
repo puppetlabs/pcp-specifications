@@ -20,6 +20,7 @@ Index
 - [Destination Report][34] - how the fabric reports the receivers of a message
 - [Error Handling][35] - error handling
 - [Message Expiration][36] - how the fabric reports expired messages
+- [Delivery Guarantees][37] - how the fabric guarantees the delivery of messages
 
 Implementations
 ----
@@ -47,6 +48,7 @@ WebSockets as the underlying wire protocol.
 [34]: destination_report.md
 [35]: error_handling.md
 [36]: ttl_expired.md
+[37]: delivery_guarantees.md
 [41]: https://github.com/puppetlabs/cthun
 [42]: https://github.com/puppetlabs/cthun-client
 [43]: https://github.com/puppetlabs/cthun-agent

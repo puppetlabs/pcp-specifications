@@ -72,7 +72,7 @@ The `puppet run` job terminates (4) and, since **C** requested to be notified
 with the outcome of the job (*notify_outcome* was flagged in the
 *non-blocking request* message), **A** sends back to **C** a
 *non-blocking response* containing the job output and possible errors of the
-executed action (5).
+executed action (5) (the final non-blocking response is not is scope for Ankeny).
 
 ### Message types
 
@@ -157,12 +157,12 @@ its schema is action-specific. *transaction_id* is the other required entry.
 | name | type | description
 |------|------|------------
 | transaction_id | string | free format id of the request/response transaction
-| notify_outcome | bool | if true, the agent must send a response containing the action outcome, once its execution completes
+| notify_outcome | bool | if true, the agent must send a response containing the action outcome, once its execution completes (not is scope for Ankeny)
 | module | string | name of the module that includes the requested action
 | action | string | name of the requested action withing its submodule
 | params | object | input parameters (optional)
 
-##### Non-blocking Response
+##### Non-blocking Response (not is scope for Ankeny)
 
 The results of the requested action should be included in the *results* object;
 its schema is action-specific. *transaction_id* and *job_id* are the other
@@ -188,18 +188,15 @@ required entries.
 
 ##### Provisional Response
 
-Such message indicates that an attempt to start the requested action was made
-and, in case of success, provides the job identifier.
+Such message indicates that requested action has successfully started.
+The *transaction_id* should be used as a reference to the remote action.
 
 ```
 {
     "properties" : {
-        "transaction_id" : { "type" : "string" },
-        "success" : { "type" : "bool" },
-        "job_id" : { "type" : "string" },
-        "error" : { "type" : "string" }
+        "transaction_id" : { "type" : "string" }
     },
-    "required" : ["transaction_id", "success"],
+    "required" : ["transaction_id"],
     "additionalProperties" : false
 }
 ```
@@ -207,9 +204,6 @@ and, in case of success, provides the job identifier.
 | name | type | description
 |------|------|------------
 | transaction_id | string | free format id of the request/response transaction
-| success | bool | whether the job execution started successfully
-| job_id | string | reference to the execution job of the requested action
-| error | string | error message, in case the job execution failed to start
 
 ### Error Message
 
@@ -240,6 +234,7 @@ described [here][1], plus the mandatory *transaction_id* field. The
 The agent should reply with an *RPC error message* in case of:
  - unknown module
  - unknown action
+ - failure when starting the action execution
  - failure during the action execution
 
 The agent should reply with an *Cthun protocol error message* in case of:
