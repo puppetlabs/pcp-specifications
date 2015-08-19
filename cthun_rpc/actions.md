@@ -12,11 +12,10 @@ Action requests can be *blocking* or *non-blocking*; that changes the way the
 action outcome is referred and stored.
 
 To inform the requester controller about the outcome of the requested action,
-the agent replies with a *response* message. Note that, for *non-blocking*
-requests, the controller can specify whether or not he wants to be notified once
-the action outcome is available (*notify_outcome* flag); refer to the
-[Request Response][1] section for a detailed description of the transaction
-workflow for both *blocking* and *non-blocking* actions.
+the agent replies with a *response* message.
 
+*TODO(ale):* refer to the transaction status action
+
+*TODO(ale):* add note regarding non-blocking requests and notify_outcome
 
 [1]: request_response.md
