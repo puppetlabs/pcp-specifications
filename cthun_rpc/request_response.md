@@ -162,7 +162,7 @@ its schema is action-specific. *transaction_id* is the other required entry.
 | action | string | name of the requested action withing its submodule
 | params | object | input parameters (optional)
 
-##### Non-blocking Response (not is scope for Ankeny)
+##### Non-blocking Response (not in scope for Ankeny)
 
 The results of the requested action should be included in the *results* object;
 its schema is action-specific. *transaction_id* and *job_id* are the other
