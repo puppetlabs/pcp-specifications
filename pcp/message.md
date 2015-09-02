@@ -1,7 +1,7 @@
-Cthun Messages
+PCP Messages
 ===
 
-Cthun messages use a chunked approach and are defined as:
+PCP messages use a chunked approach and are defined as:
 
 ```
     version | envelope chunk | [data chunk] | [debug chunk] | ... | [debug chunk]
@@ -12,13 +12,13 @@ Cthun messages use a chunked approach and are defined as:
 *HERE(ale):* the versioning section in README.md should be consistent with
 the version field
 
-The `version` field is 1 byte large and indicates the version of the Cthun
+The `version` field is 1 byte large and indicates the version of the PCP
 specification used by the message.
 
 
 ### Envelope Chunk
 
-Every Cthun message must contain one and only one envelope chunk.
+Every PCP message must contain one and only one envelope chunk.
 
 The [content](#chunk-format) of an envelope is a JSON document that must match the following
 json-schema:
@@ -46,8 +46,8 @@ json-schema:
 | id | string | string representation of 128-bit unique identifier of the message
 | message_type | string | schema name that identifies the type of message and the schema used to validate its data chunk (if any)
 | expires | string | time entry in ISO8601 format indicating when the message is no longer valid anymore
-| targets | array | list of Cthun URIs (string items) indicating the recipients
-| sender | string | Cthun URI indicating the endpoint node (server or client node) that sent the message
+| targets | array | list of PCP URIs (string items) indicating the recipients
+| sender | string | PCP URI indicating the endpoint node (server or client node) that sent the message
 | destination_report | bool | If set to true server must respond with a list of URI's that include all targets for a message |
 
 

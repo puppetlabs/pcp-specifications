@@ -1,12 +1,12 @@
-Cthun Specifications
+PCP Specifications
 ===
 
-The Cthun messaging fabric provides a lightweight communication layer.
+The PCP messaging fabric provides a lightweight communication layer.
 
 This repository describes:
 
- - the [Communications Protocol][1]
- - the [RPC layer][2]
+ - the [Puppet Communications Protocol (PCP)][1]
+ - the [Puppet Execution Protocol (PXP)][2]
 
-[1]: cthun/README.md
-[2]: cthun_rpc/README.md
+[1]: pcp/README.md
+[2]: pxp/README.md

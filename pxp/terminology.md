@@ -2,25 +2,25 @@ Terminology
 ===
 
 The following terms rely on the definitions outlined in the
-[Cthun protocol terminology][1] section.
+[PCP terminology][1] section.
 
 ### Agent
 
-Cthun client that interprets requests and performs actions
+PCP client that interprets requests and performs actions
 
 ### Controller
 
-Cthun client that can request the RPC capabilities offered by agents and process
+PCP client that can request the RPC capabilities offered by agents and process
 their outcome
 
 ### Request
 
-Cthun message by which a controller requires a capability offered by one or more
+PCP message by which a controller requires a capability offered by one or more
 agents
 
 ### Response
 
-Cthun message by which an agent replies to a controller, containing the outcome
+PCP message by which an agent replies to a controller, containing the outcome
 of a request
 
 ### Action
@@ -40,4 +40,4 @@ containing a pointer to the action outcome as soon as the action execution
 starts; when the action terminates, its outcome will be sent back to the
 controller in case it requested that by flagging the *notify_outcome* field
 
-[1]: ../cthun/terminology.md
+[1]: ../pcp/terminology.md

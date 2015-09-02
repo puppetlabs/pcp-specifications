@@ -1,7 +1,7 @@
 Message Delivery
 ===
 
-In this section, we define the behavior of Cthun servers when delivering messages.
+In this section, we define the behavior of PCP broker when delivering messages.
 
 ### Client to client messages
 
@@ -94,7 +94,7 @@ in the original message's *sender* field, _cth://client_a/contoller_ (3).
 
 ### Server Operation
 
-From the above examples, it is clear that Cthun servers must perform a number of
+From the above examples, it is clear that PCP Brokers must perform a number of
 operations to deliver a message. In this section we describe the operation
 requirements for the server.
 
@@ -122,7 +122,7 @@ The server must respond to a client with an [error message][4] in case:
 The server will not take any action in the case where:
 
  - none of the recipients of the *targets* envelope entry is registered in the
- server; this include the case of wildcarded Cthun URIs that expand into nothing
+ server; this include the case of wildcarded PCP URIs that expand into nothing
 
 #### Debug data
 
@@ -133,7 +133,7 @@ following items:
 
 | name | type | description
 |------|------|------------
-| server | string | Cthun URI of the server that performed the processing hop
+| server | string | PCP URI of the server that performed the processing hop
 | time | string | time entry in ISO8601 format indicating when the processing took place
 | stage | string | type of processing (e.g. "accepted", "delivered")
 

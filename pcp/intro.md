@@ -6,7 +6,7 @@ Actors
 
 #### Server
 
-The Cthun server is the entity that provides inter client communication. It
+The PCP Broker is the entity that provides inter client communication. It
 has the following capabilities.
 
 ##### Message Delivery
@@ -29,14 +29,14 @@ may depend on puppetdb.
 
 #### Clients
 
-Clients are addressable entities, connected to a Cthun server which can send
+Clients are addressable entities, connected to a PCP Broker which can send
 and receive messages.
 
-What is covered by Cthun specifications
+What is covered by PCP specifications
 ---
 
-The Cthun specification define the communications protocol used by the nodes
-within a Cthun framework. It covers the message syntax, Cthun URI format, the
+The PCP specification define the communications protocol used by the nodes
+within a PCP framework. It covers the message syntax, PCP URI format, the
 semantics of the services described above, and error handling.
 
 *TODO(ale):* protocol specs versioning
@@ -49,5 +49,5 @@ What will come
  - puppetdb integration (improve the inventory service)
  - node classifier integration
 
-[3]: https://github.com/puppetlabs/cthun-agent
-[4]: https://github.com/puppetlabs/clj-cthun-client
+[3]: https://github.com/puppetlabs/pxp-agent
+[4]: https://github.com/puppetlabs/clj-cpp-client

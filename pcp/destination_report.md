@@ -1,7 +1,7 @@
 Destination Report
 ===
 
-Destination report messages containin the list of URIs of the receivers to
+Destination report messages containing the list of URIs of the receivers to
 which a given message will be sent by a server. The following figure explains
 that exchange by showing the workflow of a message delivery.
 Client A sends a message to client B through server S; such message has the

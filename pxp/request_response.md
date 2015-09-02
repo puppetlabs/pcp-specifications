@@ -23,7 +23,7 @@ transaction, for a `puppet status` action.
        |                           |
 ```
 
-The controller **C** and the agent **A** are registered in the same Cthun
+The controller **C** and the agent **A** are registered in the same PCP
 framework. **C** sends a `puppet status` *blocking request* to **A** (1).
 As soon as the request is received and validated, **A** starts the execution of
 `puppet status` by relying on the logic of the puppet module (2).
@@ -36,7 +36,7 @@ are no constraints regarding the controller operation; **C** can decide whether
 or to not to implement a response timeout.
 
 Also, note that **A** must reply with a:
- - *Cthun protocol error message* in case the request message contains a bad data chunk (see [Cthun Error Handling][1])
+ - *PCP protocol error message* in case the request message contains a bad data chunk (see [PCP Error Handling][1])
  - *RPC error message* if it fails to execute the requested action (see [RPC Error Message](#error-message))
 
 ### Non-blocking Action - Message Flow
@@ -207,7 +207,7 @@ The *transaction_id* should be used as a reference to the remote action.
 
 ### Error Message
 
-An *RPC error message* follows the structure of Cthun Error messages, as
+An *RPC error message* follows the structure of PCP Error messages, as
 described [here][1], plus the mandatory *transaction_id* field. The
 *message_type* is the one specified above. The format is:
 
@@ -237,13 +237,13 @@ The agent should reply with an *RPC error message* in case of:
  - failure when starting the action execution
  - failure during the action execution
 
-The agent should reply with an *Cthun protocol error message* in case of:
+The agent should reply with an *PCP error message* in case of:
  - no data content
  - invalid data content
 Note that in such cases, it is not possible to retrieve a *transaction_id* and
 create an *RPC error message*.
 
-The controller error handling operation should handle messages at both RPC and
-Cthun protocol layer, by covering the above cases.
+The controller error handling operation should handle messages at both the PXP and
+PCP layers, by covering the above cases.
 
-[1]: ../cthun/error_handling.md
+[1]: ../pcp/error_handling.md
