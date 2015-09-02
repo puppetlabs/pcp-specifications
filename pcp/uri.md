@@ -1,20 +1,20 @@
-Cthun Uniform Resource Indicator
+PCP Uniform Resource Indicator
 ===
 
-A Cthun URI is a text string used to identify an addressable client within a Cthun
+A PCP URI is a text string used to identify an addressable client within a PCP
 framework.
 
-The Cthun URI format is:
+The PCP URI format is:
 
 `cth://<common_name>/<client_type>`
 
-The components of a Cthun URI are:
+The components of a PCP URI are:
 
-- *Cthun scheme name* `cth`, followed by a colon and a double slash
+- *PCP scheme name* `cth`, followed by a colon and a double slash
 - *Common name* The name presented in the client's SSL certificate (e.g. bob.com)
 - *Client type* The type of the client (e.g. agent)
 
-The "server" label is reserved type, as it indicates the node type of Cthun servers.
+The "server" label is reserved type, as it indicates the node type of PCP brokers.
 
 ### Wildcard URI's
 

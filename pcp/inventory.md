@@ -7,9 +7,9 @@ registered in the messaging fabric.
 Message Flow
 ---
 
-A client node that wants an inventory list of a Cthun framework must 1) be
+A client node that wants an inventory list of a PCP broker must 1) be
 registered to it (refer to the [login][1] transaction) and 2) send an inventory
-request message to a Cthun server.
+request message to a PCP broker.
 
 In case the request is processed successfully, the server will reply with an
 inventory response message.

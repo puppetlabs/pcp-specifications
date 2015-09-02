@@ -1,7 +1,7 @@
 Session Association
 ===
 
-Cthun clients must associate their session with a server before they can use
+PCP clients must associate their session with a server before they can use
 its capabilities. Session Association is the process of establishing a connection
 between a client and server and the server associating a client URI with that connection.
 
@@ -12,7 +12,7 @@ Association Message Flow
 
 A client that wants to establish a session with a server must 1) establish the
 underlying wire layer connection (e.g. WebSocket) and 2) send a *associate request*
-message to a Cthun server.
+message to a PCP server.
 
 In case the request is processed successfully, the server will reply with a
 *associate response* message. The server may ignore the request or reply with an
