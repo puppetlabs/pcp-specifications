@@ -1,4 +1,4 @@
-Puppet Execution Protocol (PXP)
+PCP Execution Protocol (PXP)
 ===
 
 This document describes an execution protocol on top of the PCP
@@ -7,7 +7,7 @@ messaging fabric.
 Index
 ---
 
-- [Introduction][10] - overview of the Puppet Execution Protocol
+- [Introduction][10] - overview of the PCP Execution Protocol
 - [Terminology][11] - adopted terminology
 - [Actions][12] - action types
 - [Request Response][13] - request/response transaction

@@ -1,7 +1,7 @@
 Actions
 ===
 
-Within the Puppet Execution Protocol layer, controllers invoke agent capabilities by requesting
+Within the PCP Execution Protocol layer, controllers invoke agent capabilities by requesting
 *actions*. This is done by sending *request* messages to one or more agents.
 Such messages specify the action name, module and input parameters.
 
