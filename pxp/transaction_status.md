@@ -11,9 +11,10 @@ requests by their transaction id.
 
 ### Request
 
-Transaction status requests can be *blocking* or *non-blocking*. They follow the
-schemas presented in the [Request/Response][2] section, where the *params* entry
-must be comply with the following JSON schema:
+Transaction status requests can be *blocking* or *non-blocking*. They must
+follow the schemas presented in the [Request/Response][2] section, where the
+*module* and *action* entries must be set to, respectively, `status` and
+`query`; also the *params* entry must be comply with the following JSON schema:
 
 ```
 {
@@ -24,6 +25,7 @@ must be comply with the following JSON schema:
     "additionalProperties" : false
 }
 ```
+
 | name | type | description
 |------|------|------------
 | transaction_id | string | the id of the transaction the controller is interested in
