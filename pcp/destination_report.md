@@ -34,7 +34,7 @@ The destination report is described by the following json-schema:
         "id" : { "type" : "string" },
         "targets" : { "type" : "array",
                       "items" : { "type" : "string",
-                                  "pattern" : "^cth://[^/]*/[^/]+$" }}
+                                  "pattern" : "^pcp://[^/]*/[^/]+$" }}
     },
     "required" : ["id", "targets"],
     "additionalProperties" : false

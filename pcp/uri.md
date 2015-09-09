@@ -6,11 +6,11 @@ framework.
 
 The PCP URI format is:
 
-`cth://<common_name>/<client_type>`
+`pcp://<common_name>/<client_type>`
 
 The components of a PCP URI are:
 
-- *PCP scheme name* `cth`, followed by a colon and a double slash
+- *PCP scheme name* `pcp`, followed by a colon and a double slash
 - *Common name* The name presented in the client's SSL certificate (e.g. bob.com)
 - *Client type* The type of the client (e.g. agent)
 
@@ -25,20 +25,19 @@ wild card to include all clients.
 A URI that expands to all types of clients that present the *Common name* _bob.com_
 will look like:
 
-`cth://bob.com/*`
+`pcp://bob.com/*`
 
 A URI that expands to all clients that define their type as _agent_ will look like:
 
-`cth://*/agent`
+`pcp://*/agent`
 
 A URI that expands to all clients will look like:
 
-`cth://*/*`
+`pcp://*/*`
 
 ### Server addressing
 
 A client may address the server it is currently correct to by using the short
 hand:
 
-`cth:///server`
-
+`pcp:///server`

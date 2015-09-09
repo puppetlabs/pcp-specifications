@@ -6,7 +6,7 @@ In this section, we define the behavior of PCP broker when delivering messages.
 ### Client to client messages
 
 Consider the following example. client A and client B are connected to a server S.
-A is identified by the URI _cth://client_a/controller_ and B by _cth://client_b/agent_.
+A is identified by the URI _pcp://client_a/controller_ and B by _pcp://client_b/agent_.
 A wishes to send a [message][3] via S to B.
 
 ```
@@ -21,12 +21,12 @@ A wishes to send a [message][3] via S to B.
 ```
 
 **A** sends a message to **S**, specifying a single URI in the message envelope's
-*targets* field, _cth://client_b/agent_ (1).
+*targets* field, _pcp://client_b/agent_ (1).
 
 **S** receives the message from **A**, parses it and determines that it is valid.
 **S** inspects the *targets* field in the message envelope
 and prepares to deliver the message to each of the supplied URIs,
-_cth://client_b/agent_ in this particular case (2).
+_pcp://client_b/agent_ in this particular case (2).
 
 **S** determines that the URI points to **B**. It then delivers the message to
 **B** (3).
@@ -34,8 +34,8 @@ _cth://client_b/agent_ in this particular case (2).
 ### Client to client messages using wildcards
 
 Consider the following example. client A, client B and client C are connected to
-a server S. A is identified by the URI _cth://client_a/controller_, B by
-_cth://client_b/agent_ and C by _cth://client_c/agent_. A wishes to send a message
+a server S. A is identified by the URI _pcp://client_a/controller_, B by
+_pcp://client_b/agent_ and C by _pcp://client_c/agent_. A wishes to send a message
 to all clients of type agent.
 
 ```
@@ -54,11 +54,11 @@ to all clients of type agent.
 ```
 
 **A** sends a message to **S**, specifying a single URI in the message envelope's
-*targets* field, _cth://*/agent_. (1)
+*targets* field, _pcp://*/agent_. (1)
 
 **S** receives the message from **A**, parses it and determines that it is valid.
 **S** inspects the *targets* field in the message envelope and determines that
-the URI _cth://*/agent_ contains a wildcard. The wildcard is expanded to include
+the URI _pcp://*/agent_ contains a wildcard. The wildcard is expanded to include
 all clients that have specified their type as *agent*. (2)
 
 **S** determines that the expanded URI points to both **B** and **C**. It then
@@ -67,7 +67,7 @@ delivers one copy of the message to both **B** and **C**. (3), (4)
 ### Client to server messages
 
 Consider the following example. Client A is connected to a server S. A is identified
-by the URI _cth://client_a/controller_. A wishes to perform an inventory query and
+by the URI _pcp://client_a/controller_. A wishes to perform an inventory query and
 thus needs to send a message to S (refer to the [inventory][2] section).
 
 ```
@@ -82,7 +82,7 @@ thus needs to send a message to S (refer to the [inventory][2] section).
 ```
 
 **A** sends a message to **S**, specifying a single URI in the message envelope's
-*targets* field, _cth:///server_ (1).
+*targets* field, _pcp:///server_ (1).
 
 **S** receives the message from **A**, parses it and determines that it is valid.
 **S** inspects the *targets* field in the message envelope and determines that
@@ -90,7 +90,7 @@ the message was directed at itself.
 **S** performs a server specific task, determined by the value supplied in the
 *message_type* field in the [message][3] envelope (2).
 **S** constructs a resulting message and sends it to **A** using the URI supplied
-in the original message's *sender* field, _cth://client_a/contoller_ (3).
+in the original message's *sender* field, _pcp://client_a/contoller_ (3).
 
 ### Server Operation
 
