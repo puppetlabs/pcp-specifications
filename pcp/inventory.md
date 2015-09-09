@@ -31,7 +31,7 @@ An inventory request message is decribed by the following json-schema:
     "properties" : {
         "query" : { "type" : "array",
                     "items" : { "type" : "string",
-                                "pattern" : "^cth://[^/]*/[^/]+$" }
+                                "pattern" : "^pcp://[^/]*/[^/]+$" }
         }
     },
     "required" : ["query"],
@@ -46,7 +46,7 @@ An inventory response message is decribed by the following json-schema:
     "properties" : {
         "uris" : { "type" : "array",
                    "items" : { "type" : "string",
-                               "pattern" : "^cth://[^/]*/[^/]+$" }
+                               "pattern" : "^pcp://[^/]*/[^/]+$" }
         }
     },
     "required" : ["uris"],

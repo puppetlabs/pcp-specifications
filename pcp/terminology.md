@@ -15,7 +15,7 @@ described in this document
 
 String that identifies a client within a PCP framework; URIs are used to address
 nodes and are made up of three parts, a scheme name, a common name and a type. For
-Example: cth://bob.com/controller
+Example: pcp://bob.com/controller
 
 ### Client common name
 

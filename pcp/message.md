@@ -31,9 +31,9 @@ json-schema:
         "expires" : {"type" : "string" },
         "targets" : { "type" : "array",
                       "items" : { "type" : "string",
-                                  "pattern" : "^cth://[^/]*/[^/]+$" }},
+                                  "pattern" : "^pcp://[^/]*/[^/]+$" }},
         "sender" : { "type" : "string",
-                     "pattern" : "^cth://[^/]*/[^/]+$" },
+                     "pattern" : "^pcp://[^/]*/[^/]+$" },
         "destination_report" : {"type" : "bool" }
     },
     "required" : ["id", "message_type", "expires", "targets", "sender"],
@@ -74,7 +74,7 @@ is described by the following json-schema.
                 "properties" : {
                     "server" : {
                         "type" : "string",
-                        "pattern" : "^cth://[^/]*/[^/]+$"
+                        "pattern" : "^pcp://[^/]*/[^/]+$"
                     },
                     "stage" : { "type" : "string" },
                     "time" : { "type" : "string" }
