@@ -24,12 +24,10 @@ failed delivery attempts:
 ```
 
 Client A sends a message to client B through server S (1). S processes (2) and
-tries to deliver it to B, but the message is dropped (3). S does not receives
-the expected ack from B after a certain interval (refer to server operation in
-the [delivery section][1]); S resends the message and restarts the retransmission
-timer (4). Once again, the message is not acknowledged. In the meantime the
-message TTL did expire; as a consequence S sends a *ttl_expired* message back
-to A (5).
+tries to deliver it to B, but the message is dropped at some point in the
+sending queue (3). S tries to resend the message, but it fails again (4). In the
+meantime the message TTL did expire; as a consequence S sends a *ttl_expired*
+message back to A (5).
 
 ttl_expired messages must have the envelope *message_type* equal to
 `http://puppetlabs.com/ttl_expired`.
