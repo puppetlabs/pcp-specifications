@@ -19,9 +19,9 @@ recipients until the message has expired.
 
 ##### Inventory
 
-This capability depends on an naive internal inventory service which, when
-queried, will return a list of URI's of clients that have been registered with
-the server.
+When the broker receives an [inventory][1] request, it will return the list of
+[PCP URIs][2] of clients that currently have a [session][3] associated with the
+broker.
 
 (*Caveat*) The current implementation of the inventory service is purposefully
 simplistic. When the requirements have been finalised the inventory service
@@ -47,5 +47,6 @@ What will come
  - puppetdb integration (improve the inventory service)
  - node classifier integration
 
-[3]: https://github.com/puppetlabs/pxp-agent
-[4]: https://github.com/puppetlabs/clj-cpp-client
+[1]: inventory.md
+[2]: uri.md
+[3]: association.md
