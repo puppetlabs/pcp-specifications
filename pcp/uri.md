@@ -35,9 +35,9 @@ A URI that expands to all clients will look like:
 
 `pcp://*/*`
 
-### Server addressing
+### Broker addressing
 
-A client may address the server it is currently correct to by using the short
+A client may address the broker it is currently correct to by using the short
 hand:
 
 `pcp:///server`

@@ -43,9 +43,8 @@ JSON schema:
 | message_type | string | schema name that identifies the type of message and the schema used to validate its data chunk (if any)
 | expires | string | time entry in ISO8601 format indicating when the message is no longer valid anymore
 | targets | array | list of PCP URIs (string items) indicating the recipients
-| sender | string | PCP URI indicating the endpoint node (server or client node) that sent the message
-| destination_report | bool | If set to true server must respond with a list of URI's that include all targets for a message |
-
+| sender | string | PCP URI indicating the endpoint node (broker or client node) that sent the message
+| destination_report | bool | If set to true broker must respond with a list of URI's that include all targets for a message |
 
 ### Data Chunk
 
@@ -59,8 +58,6 @@ A message may have zero or multiple debug chunks. Debug chunks are appended to t
 back of the message by either clients or servers, and their [content](#chunk-format)
 is described by the following JSON schema.
  
-*TODO(ale):* replace "server" with "broker"
-
 ```
 {
     "type" : "object",

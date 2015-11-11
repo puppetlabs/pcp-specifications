@@ -1,37 +1,37 @@
 Session Association
 ===
 
-PCP clients must associate their session with a server before they can use
+PCP clients must associate their session with a broker before they can use
 its capabilities. Session Association is the process of establishing a connection
-between a client and server and the server associating a client URI with that connection.
+between a client and broker and the broker associating a client URI with that connection.
 
 This is done by completing a successful _associate_ transaction.
 
 Association Message Flow
 ---
 
-A client that wants to establish a session with a server must 1) establish the
+A client that wants to establish a session with a broker must 1) establish the
 underlying wire layer connection (e.g. WebSocket) and 2) send a *associate request*
-message to a PCP server.
+message to that PCP broker.
 
-In case the request is processed successfully, the server will reply with a
-*associate response* message. The server may ignore the request or reply with an
+In case the request is processed successfully, the broker will reply with a
+*associate response* message. The broker may ignore the request or reply with an
 *error message* in case of node identity mismatch (see
-[Server Operation](#server_operation)).
+[Broker Operation](#broker-operation)).
 
-Should a connection already be associated with the given client URI the server
-should disconnect the older connection, and consider the newly-assocated
+Should a session already be associated with the given client URI, the broker
+should disconnect the older connection, and consider the newly-associated
 session to be authoritative for that URI.
 
 Associate Messages
 ---
 
-Associate request and response messages must have the envelope *message_type* entry
-respectively equal to `http://puppetlabs.com/associate_request` and
+*Associate request* and *response* messages must have the envelope *message_type*
+entry respectively equal to `http://puppetlabs.com/associate_request` and
 `http://puppetlabs.com/associate_response`. An Associate request message does not
 require a Data Chunk.
 
-Association response messages are described by the following json-schema:
+Association response messages are described by the following JSON schema:
 
 ```json
 {
@@ -59,20 +59,20 @@ Association error messages must conform with the format described in the
 [error handling][2] section. The *message_type* entry of the JSON data `content`
 must be equal to the respective association schema, mentioned above.
 
-Server Operation
+Broker Operation
 ---
 
-Once an association request is received, the server must extract the common name
-from the client SSL certificate, the one used to establish the underlying connection. The
-server will then match the certificate ID against the node identity indicated in
-the *sender* URI of the request envelope. In case of mismatch, the server must
+Once an association request is received, the broker must extract the common name
+from the client SSL certificate, the one used to establish the underlying connection.
+The broker will then match the certificate ID against the node identity indicated in
+the *sender* URI of the request envelope. In case of mismatch, the broker must
 reply with an error message, as described in the above section.
 
-In case the underlying wire connection drops, the server must guarantee that the
+In case the underlying wire connection drops, the broker must guarantee that the
 client will be disassociated, meaning that the client URI will no longer map to
 its underlying connection (e.g. WebSocket connection).
 
-The server must keep track of the associated clients and must be
+The broker must keep track of the associated clients and must be
 able to obtain the current status of their wire connections. That is necessary
 in order to perform delivery and inventory operations.
 
