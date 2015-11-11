@@ -2,7 +2,9 @@ Message Versioning
 ===
 
 This section describes how the Puppet Communications Protocol handles clients
-attempting to communicate using different versions of the protocol.
+attempting to communicate using different versions of the protocol. Here, we
+will assume that WebSocket provides the wire communication layer; a WebSocket
+URI will convey the version information when a PCP connection is attempted.
 
 ### How clients and the pcp-broker determine protocol version
 
