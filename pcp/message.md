@@ -15,13 +15,12 @@ the version field
 The `version` field is 1 byte large and indicates the version of the PCP
 specification used by the message.
 
-
 ### Envelope Chunk
 
 Every PCP message must contain one and only one envelope chunk.
 
 The [content](#chunk-format) of an envelope is a JSON document that must match the following
-json-schema:
+JSON schema:
 
 ```
 {
@@ -61,7 +60,7 @@ entry of the envelope.
 
 A message may have zero or multiple debug chunks. Debug chunks are appended to the
 back of the message by either clients or servers, and their [content](#chunk-format)
-is described by the following json-schema.
+is described by the following JSON schema.
 
 ```
 {
@@ -114,7 +113,5 @@ order. This limits chunk content to a maximum size of 2.1 GB.
 
 The `content` field is of variable length which is determined by the `size` field.
 There are no restrictions for the type of the stored value nor for its representation.
-
-
 
 [1]: delivery.md

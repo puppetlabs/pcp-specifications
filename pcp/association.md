@@ -49,20 +49,20 @@ Association response messages are described by the following json-schema:
 }
 ```
 These fields are described as:
+          
+| name | type | description
+|------|------|------------
+| id | string | message id of the related request
+| success | boolean | whether the session association was successful
+| reason | string | reason why a association failed (optional)
 
- - a *id* string entry set to the message id of the related request
- - a *success* boolean entry that indicates session association was successful
- - an optional *reason* field may include the reason why a association failed
-
-<a name="error_handling"/>
-Error Handling
+Error Message
 ---
 
 Association error messages must conform with the format described in the
 [error handling][2] section. The *message_type* entry of the JSON data `content`
 must be equal to the respective association schema, mentioned above.
 
-<a name="server_operation"/>
 Server Operation
 ---
 
