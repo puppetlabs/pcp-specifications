@@ -39,8 +39,6 @@ The PCP specification define the communications protocol used by the nodes
 within a PCP framework. It covers the message syntax, PCP URI format, the
 semantics of the services described above, and error handling.
 
-*TODO(ale):* protocol specs versioning
-
 What will come
 ---
 

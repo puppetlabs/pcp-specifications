@@ -131,14 +131,13 @@ When a server processes a client message, it may add a debug chunk with a JSON
 taken so far in the message fabric. The *hops* entry is an array with the
 following items:
 
+*TODO(ale):* replace "server" with "broker"
+
 | name | type | description
 |------|------|------------
 | server | string | PCP URI of the server that performed the processing hop
 | time | string | time entry in ISO8601 format indicating when the processing took place
 | stage | string | type of processing (e.g. "accepted", "delivered")
-
-*TODO(ale):* add inter-server routing specs, if necessary once we implement
-      distribution
 
 [1]: association.md
 [2]: inventory.md

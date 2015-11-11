@@ -31,10 +31,6 @@ respectively equal to `http://puppetlabs.com/associate_request` and
 `http://puppetlabs.com/associate_response`. An Associate request message does not
 require a Data Chunk.
 
-*DISCUSS(ale):* decide how to use error messages; decide if the success entry
-    in a association response is redundant (a response would be a success notification
-    whereas errors would signal a failure)
-
 Association response messages are described by the following json-schema:
 
 ```json

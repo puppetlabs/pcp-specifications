@@ -15,9 +15,5 @@ and [Transaction Status][2] sections for more details.
 To inform the requester controller about the outcome of the requested action,
 the agent replies with a *response* message.
 
-*TODO(ale):* refer to the transaction status action
-
-*TODO(ale):* add note regarding non-blocking requests and notify_outcome
-
 [1]: request_response.md
 [2]: transaction_status.md

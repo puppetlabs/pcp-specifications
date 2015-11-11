@@ -9,9 +9,6 @@ PCP messages use a chunked approach and are defined as:
 
 ### Version
 
-*HERE(ale):* the versioning section in README.md should be consistent with
-the version field
-
 The `version` field is 1 byte large and indicates the version of the PCP
 specification used by the message.
 
@@ -61,6 +58,8 @@ entry of the envelope.
 A message may have zero or multiple debug chunks. Debug chunks are appended to the
 back of the message by either clients or servers, and their [content](#chunk-format)
 is described by the following JSON schema.
+ 
+*TODO(ale):* replace "server" with "broker"
 
 ```
 {
@@ -95,9 +94,6 @@ Chunks have variable size and use the following format:
 ```
     descriptor | size | content
 ```
-
-*TODO(ale):* define descriptor flags of the higher bits (compression, content
-    type)
 
 The `descriptor` field is 1 byte large and describes the chunk.
 The high 4 bits are reserved. The lower 4 bits indicate the chunk type; the list

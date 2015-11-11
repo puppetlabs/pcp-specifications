@@ -34,8 +34,6 @@ follow the schemas presented in the [Request/Response][2] section, where the
 
 ### Blocking Response
 
-*TODO(ale):* extend to non-blocking responses once we enable those
-
 Transaction status responses must have the *results* entry complying with the
 following schema:
 

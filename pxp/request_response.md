@@ -95,8 +95,6 @@ messages.
 
 ##### Blocking Request
 
-*DISCUSS(ale):* consider changing "params"
-
 ```
 {
     "properties" : {

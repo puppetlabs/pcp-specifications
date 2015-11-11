@@ -21,9 +21,6 @@ Inventory request and response messages must have the envelope *data_schema*
 entry respectively equal to `http://puppetlabs.com/inventory_request` and
 `http://puppetlabs.com/inventory_response`.
 
-*TODO(ale):* update this in case we decide to enable regex queries; it only
-    describes wildcarded URIs queries, as supported so far
-
 An inventory request message is decribed by the following json-schema:
 
 ```
@@ -56,8 +53,6 @@ An inventory response message is decribed by the following json-schema:
 
 Error Handling
 ---
-
-*DISCUSS(ale):* must the server always reply to an inventory request?
 
 In case of an error during the processing of the inventory list, the server must
 reply with an error message as described in the [error handling][2] section.
