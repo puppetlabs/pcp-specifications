@@ -9,19 +9,15 @@ PCP messages use a chunked approach and are defined as:
 
 ### Version
 
-*HERE(ale):* the versioning section in README.md should be consistent with
-the version field
-
 The `version` field is 1 byte large and indicates the version of the PCP
 specification used by the message.
-
 
 ### Envelope Chunk
 
 Every PCP message must contain one and only one envelope chunk.
 
 The [content](#chunk-format) of an envelope is a JSON document that must match the following
-json-schema:
+JSON schema:
 
 ```
 {
@@ -47,9 +43,8 @@ json-schema:
 | message_type | string | schema name that identifies the type of message and the schema used to validate its data chunk (if any)
 | expires | string | time entry in ISO8601 format indicating when the message is no longer valid anymore
 | targets | array | list of PCP URIs (string items) indicating the recipients
-| sender | string | PCP URI indicating the endpoint node (server or client node) that sent the message
-| destination_report | bool | If set to true server must respond with a list of URI's that include all targets for a message |
-
+| sender | string | PCP URI indicating the endpoint node (broker or client node) that sent the message
+| destination_report | bool | If set to true broker must respond with a list of URI's that include all targets for a message |
 
 ### Data Chunk
 
@@ -61,8 +56,8 @@ entry of the envelope.
 
 A message may have zero or multiple debug chunks. Debug chunks are appended to the
 back of the message by either clients or servers, and their [content](#chunk-format)
-is described by the following json-schema.
-
+is described by the following JSON schema.
+ 
 ```
 {
     "type" : "object",
@@ -97,9 +92,6 @@ Chunks have variable size and use the following format:
     descriptor | size | content
 ```
 
-*TODO(ale):* define descriptor flags of the higher bits (compression, content
-    type)
-
 The `descriptor` field is 1 byte large and describes the chunk.
 The high 4 bits are reserved. The lower 4 bits indicate the chunk type; the list
 of admissible values and associated types is:
@@ -114,7 +106,5 @@ order. This limits chunk content to a maximum size of 2.1 GB.
 
 The `content` field is of variable length which is determined by the `size` field.
 There are no restrictions for the type of the stored value nor for its representation.
-
-
 
 [1]: delivery.md

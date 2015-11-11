@@ -12,10 +12,10 @@ the request; see the [Request/Response][2] section for more details.
 
 ### Request
 
-Transaction status requests can be *blocking* or *non-blocking*. They must
-follow the schemas presented in the [Request/Response][2] section, where the
-*module* and *action* entries must be set to, respectively, `status` and
-`query`; also the *params* entry must comply with the following JSON schema:
+Transaction status requests must be *blocking*. They must follow the schemas
+presented in the [Request/Response][2] section, where the *module* and *action*
+entries must be set to, respectively, `status` and `query`; also the *params*
+entry must comply with the following JSON schema:
 
 ```
 {
@@ -33,8 +33,6 @@ follow the schemas presented in the [Request/Response][2] section, where the
 
 
 ### Blocking Response
-
-*TODO(ale):* extend to non-blocking responses once we enable those
 
 Transaction status responses must have the *results* entry complying with the
 following schema:

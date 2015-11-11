@@ -2,15 +2,15 @@ Destination Report
 ===
 
 Destination report messages containing the list of URIs of the receivers to
-which a given message will be sent by a server. The following figure explains
+which a given message will be sent by a broker. The following figure explains
 that exchange by showing the workflow of a message delivery.
-Client A sends a message to client B through server S; such message has the
+Client A sends a message to client C through broker B; such message has the
 *desitnation_report* flag set (1). As a consequence of that, after processing
-the message (2), S replies to A with a destination report (3), before delivering
-the message to client B (4).
+the message (2), B replies to A with a destination report (3), before delivering
+the message to client C (4).
 
 ```
-    client A                    server S                    client B
+    client A                    server B                    client C
        |                           |                           |
        |        1 message          |                           |
        |-------------------------->|                           |

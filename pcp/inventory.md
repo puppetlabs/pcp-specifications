@@ -11,7 +11,7 @@ A client node that wants an inventory list of a PCP broker must 1) be
 registered to it (refer to the [login][1] transaction) and 2) send an inventory
 request message to a PCP broker.
 
-In case the request is processed successfully, the server will reply with an
+In case the request is processed successfully, the broker will reply with an
 inventory response message.
 
 Inventory Messages
@@ -20,9 +20,6 @@ Inventory Messages
 Inventory request and response messages must have the envelope *data_schema*
 entry respectively equal to `http://puppetlabs.com/inventory_request` and
 `http://puppetlabs.com/inventory_response`.
-
-*TODO(ale):* update this in case we decide to enable regex queries; it only
-    describes wildcarded URIs queries, as supported so far
 
 An inventory request message is decribed by the following json-schema:
 
@@ -57,9 +54,7 @@ An inventory response message is decribed by the following json-schema:
 Error Handling
 ---
 
-*DISCUSS(ale):* must the server always reply to an inventory request?
-
-In case of an error during the processing of the inventory list, the server must
+In case of an error during the processing of the inventory list, the broker must
 reply with an error message as described in the [error handling][2] section.
 The *message_type* entry of the JSON data `content` must be equal to the
 inventory request one mentioned above.
@@ -67,7 +62,7 @@ inventory request one mentioned above.
 Server Operation
 ---
 
-The server must expand the wildcard and determine the list of URI's of all matching
+The broker must expand the wildcard and determine the list of URI's of all matching
 clients.
 
 [1]: registration.md

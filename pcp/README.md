@@ -31,10 +31,10 @@ WebSockets as the underlying wire protocol.
 
  - [pcp-broker][41] provides a pcp-broker implementation in Clojure
  - [cpp-pcp-client][42] is a PCP client library written in C++
- - [pxp-agent][43] is an agent used to run puppet, based on cpp-pcp-client
+ - [pxp-agent][43] is a PXP agent based on cpp-pcp-client, that offers a Puppet module
  - [clj-pcp-common][44] is a library for processing pcp messages written in
  Clojure
- - [clj-pcp-client][45] is a PCP client ibrary written in Clojure *TODO(ploubser) Link is broken since we're mid rename
+ - [clj-pcp-client][45] is a PCP client ibrary written in Clojure
 
 [10]: intro.md
 [11]: terminology.md
@@ -53,4 +53,4 @@ WebSockets as the underlying wire protocol.
 [42]: https://github.com/puppetlabs/cpp-pcp-client
 [43]: https://github.com/puppetlabs/pxp-agent
 [44]: https://github.com/puppetlabs/clj-pcp-common
-[45]: https://github.com/puppetlabs/clj-pcp-client 
+[45]: https://github.com/puppetlabs/clj-pcp-client

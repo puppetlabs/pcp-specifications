@@ -1,7 +1,7 @@
 Error Messages
 ===
 
-When an invalid message has been sent to a server the server must respond with
+When an invalid message has been sent to a broker, the broker must respond with
 an error message.
 
 Error messages are described by the following json-schema:
