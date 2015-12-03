@@ -24,13 +24,14 @@ JSON schema:
     "properties" : {
         "id" : { "type" : string" },
         "message_type" : { "type" : "string" },
-        "expires" : {"type" : "string" },
+        "expires" : { "type" : "string" },
         "targets" : { "type" : "array",
                       "items" : { "type" : "string",
                                   "pattern" : "^pcp://[^/]*/[^/]+$" }},
         "sender" : { "type" : "string",
                      "pattern" : "^pcp://[^/]*/[^/]+$" },
-        "destination_report" : {"type" : "bool" }
+        "destination_report" : { "type" : "bool" },
+        "in-reply-to" : { "type" : "string" }
     },
     "required" : ["id", "message_type", "expires", "targets", "sender"],
     "additionalProperties" : false
@@ -44,7 +45,8 @@ JSON schema:
 | expires | string | time entry in ISO8601 format indicating when the message is no longer valid anymore
 | targets | array | list of PCP URIs (string items) indicating the recipients
 | sender | string | PCP URI indicating the endpoint node (broker or client node) that sent the message
-| destination_report | bool | If set to true broker must respond with a list of URI's that include all targets for a message |
+| destination_report | bool | if set to true broker must respond with a list of URI's that include all targets for a message |
+| in-reply-to | string | used by the broker to indicate the ID of the received message to which he's replying |
 
 ### Data Chunk
 
@@ -57,7 +59,7 @@ entry of the envelope.
 A message may have zero or multiple debug chunks. Debug chunks are appended to the
 back of the message by either clients or servers, and their [content](#chunk-format)
 is described by the following JSON schema.
- 
+
 ```
 {
     "type" : "object",

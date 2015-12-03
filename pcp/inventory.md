@@ -36,7 +36,8 @@ An inventory request message is decribed by the following json-schema:
 }
 ```
 
-An inventory response message is decribed by the following json-schema:
+The data `content` of inventory response messages is decribed by the following
+json-schema:
 
 ```
 {
@@ -50,6 +51,9 @@ An inventory response message is decribed by the following json-schema:
     "additionalProperties" : false
 }
 ```
+
+The envelope `content` of inventory response messages must include the
+`in-reply-to` entry, set to the `id` of the inventory request message.
 
 Error Handling
 ---
