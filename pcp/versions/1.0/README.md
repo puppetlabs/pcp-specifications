@@ -29,10 +29,10 @@ Implementations
 The following projects follow the PCP specifications described here, using
 WebSockets as the underlying wire protocol.
 
- - [pcp-broker][41] provides a pcp-broker implementation in Clojure
+ - [pcp-broker][41] provides a PCP broker implementation in Clojure
  - [cpp-pcp-client][42] is a PCP client library written in C++
  - [pxp-agent][43] is a PXP agent based on cpp-pcp-client, that offers a Puppet module
- - [clj-pcp-common][44] is a library for processing pcp messages written in
+ - [clj-pcp-common][44] is a library for processing PCP messages written in
  Clojure
  - [clj-pcp-client][45] is a PCP client ibrary written in Clojure
 
