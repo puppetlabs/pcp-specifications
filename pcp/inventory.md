@@ -21,7 +21,7 @@ Inventory request and response messages must have the envelope *data_schema*
 entry respectively equal to `http://puppetlabs.com/inventory_request` and
 `http://puppetlabs.com/inventory_response`.
 
-An inventory request message is decribed by the following json-schema:
+An inventory request message is described by the following json-schema:
 
 ```
 {
@@ -36,7 +36,7 @@ An inventory request message is decribed by the following json-schema:
 }
 ```
 
-The data `content` of inventory response messages is decribed by the following
+The data `content` of inventory response messages is described by the following
 json-schema:
 
 ```
