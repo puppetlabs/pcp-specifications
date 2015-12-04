@@ -46,7 +46,7 @@ JSON schema:
 | targets | array | list of PCP URIs (string items) indicating the recipients
 | sender | string | PCP URI indicating the endpoint node (broker or client node) that sent the message
 | destination_report | bool | if set to true broker must respond with a list of URI's that include all targets for a message |
-| in-reply-to | string | used by the broker to indicate the ID of the received message to which he's replying |
+| in-reply-to | string | the ID of the received message to which this is a reply |
 
 ### Data Chunk
 
