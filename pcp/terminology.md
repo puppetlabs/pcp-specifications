@@ -8,23 +8,23 @@ and inventory queries.
 
 ### Client
 
-addressable entity that uses the Puppet communications protocol
+addressable entity that uses the Puppet Communications Protocol
 described in this document
 
 ### Uniform Resource Indicator (URI)
 
-String that identifies a client within a PCP framework; URIs are used to address
+string that identifies a client within a PCP framework; URIs are used to address
 nodes and are made up of three parts, a scheme name, a common name and a type. For
 Example: pcp://bob.com/controller
 
 ### Client common name
 
-The name of a client determined by the common name in a client certificate
+the name of a client determined by the common name in a client certificate
 
 ### Client type
 
-A text label that identifies the role of a given node within a PCP framework.
-The "server" type is the reserved label for PCP brokers.
+a text label that identifies the role of a given node within a PCP framework;
+the "server" type is the reserved label for PCP brokers
 
 ### Broker
 
