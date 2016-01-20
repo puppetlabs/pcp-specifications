@@ -52,9 +52,6 @@ json-schema:
 }
 ```
 
-The envelope `content` of inventory response messages must include the
-`in-reply-to` entry, set to the `id` of the inventory request message.
-
 Error Handling
 ---
 
