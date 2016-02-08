@@ -37,13 +37,13 @@ or to not to implement a response timeout.
 
 Also, note that **A** must reply with a:
  - *PCP protocol error message* in case the request message contains a bad data chunk (see [PCP Error Handling][1])
- - *RPC error message* if it fails to execute the requested action (see [RPC Error Message](#error-message))
+ - *RPC error message* if it fails to execute the requested action or in case of invalid results (see [RPC Error Message](#error-message))
 
 ### Non-blocking Action - Message Flow
 
 This time, **C** wants to executes a `puppet run` action in **A**. Since such
 action may take some time to complete, **C** decides to use a *non-blocking*
-transaction in order to receive an immediate confirmation of its execution
+transaction, in order to receive an immediate confirmation of its execution
 start.
 
 ```
@@ -117,16 +117,46 @@ messages.
 
 ##### Blocking Response
 
-The results of the requested action should be included in the *results* object;
-its schema is action-specific. *transaction_id* is the other required entry.
+The output of the requested action (results on stdout, errors on stderr, and the
+exit code) should be included in the *output* object.
+
+Note that there's no requirement for the action's *stdout* type, as its format
+is action-specific. As for the agent operation, the *stdout* JSON schema should
+be enforced by the agent in order to guarantee the specific format expected by
+the controller; in case the *stdout* entry is not validated against its schema,
+the agent should instead reply with an [RPC error message](#rpc-error-message).
+
+Other required entries are the *transaction_id*, that correlates the response
+message with the original request, and the *action_metadata* object, that
+provides more information about the action outcome.
 
 ```
 {
     "properties" : {
         "transaction_id" : { "type" : "string" },
-        "results" : { "type" : "object" }
+        "output" : {
+            "type" : "object",
+            "items" : {
+                "stdout" : { "description" : "results in an action-specific format" },
+                "stderr" : { "type" : "string" },
+                "exitcode" : { "type" : "number" }
+            },
+            "required" : ["stdout", "exitcode"],
+            "additionalProperties" : false
+        },
+        "metadata" : {
+            "type" : "object",
+            "items" : {
+                "module" : { "type" : "string" },
+                "action" : { "type" : "string" },
+                "start" : { "type" : "string" },
+                "end" : { "type" : "string" }
+            },
+            "required" : ["module", "action", "start", "end"],
+            "additionalProperties" : false
+        }
     },
-    "required" : ["transaction_id", "results"],
+    "required" : ["transaction_id", "output", "metadata"],
     "additionalProperties" : false
 }
 ```
@@ -134,9 +164,29 @@ its schema is action-specific. *transaction_id* is the other required entry.
 | name | type | description
 |------|------|------------
 | transaction_id | string | free format id of the request/response transaction
-| results | object | action results in action-specific format
+| output | object | contains the action's output
+| metadata | object | contains information about the execution of the requested action
+
+Description of *output* entries:
+
+| name | type | description
+|------|------|------------
+| stdout | string | action results presented on stdout, in the action-specific JSON format (validated by the agent)
+| stderr | string | any output on stderr produced by the action
+| exitcode | number | action's exit code
+
+Description of *action_metadata* entries:
+
+| name | type | description
+|------|------|------------
+| module | string | the executed module
+| action | string | the executed module's action
+| start | string | timestamp in ISO8601 format indicating when the action started
+| end | string | timestamp in ISO8601 format indicating when the action completed
 
 ##### Non-blocking Request
+
+Same as the *blocking request*, apart from the *notify_outcome* entry:
 
 ```
 {
@@ -155,31 +205,18 @@ its schema is action-specific. *transaction_id* is the other required entry.
 | name | type | description
 |------|------|------------
 | transaction_id | string | free format id of the request/response transaction
-| notify_outcome | bool | if true, the agent must send a non-blocking response containing the action outcome, once its execution completes
+| notify_outcome | bool | if true, the agent must send a non-blocking response containing the action output, once its execution completes
 | module | string | name of the module that includes the requested action
 | action | string | name of the requested action withing its submodule
 | params | object | input parameters (optional)
 
 ##### Non-blocking Response
 
-The results of the requested action should be included in the *results* object;
-its schema is action-specific. *transaction_id* is the other required entry.
+This type of message has the same structure as the *blocking response* one. The
+only difference lies in the envelope's *message_type*.
 
-```
-{
-    "properties" : {
-        "transaction_id" : { "type" : "string" },
-        "results" : { "type" : "object" }
-    },
-    "required" : ["transaction_id", "job_id", "results"],
-    "additionalProperties" : false
-}
-```
-
-| name | type | description
-|------|------|------------
-| transaction_id | string | free format id of the request/response transaction
-| results | object | action results in action-specific format
+The agent must send the *non-blocking* response at the end of the action
+execution if the original request had the *notify_outcome* entry set to `true`.
 
 ##### Provisional Response
 
@@ -200,20 +237,42 @@ The *transaction_id* should be used as a reference to the remote action.
 |------|------|------------
 | transaction_id | string | free format id of the request/response transaction
 
-### Error Message
+### RPC Error Message
 
-An *RPC error message* follows the structure of PCP Error messages, as
-described [here][1], plus the mandatory *transaction_id* field. The
-*message_type* is the one specified above. The format is:
+An *RPC error message* indicates that the agent failed to process an action
+requested previously (the *transaction_id* refers to such transaction) and
+provides information about such failure.
+
+The format is:
 
 ```
 {
     "properties" : {
         "transaction_id" : { "type" : "string" },
         "id" : { "type" : "string" },
-        "description" : { "type" : "string" }
+        "output" : {
+            "type" : "object",
+            "items" : {
+                "stdout" : { "type" : "string" },
+                "stderr" : { "type" : "string" },
+                "exitcode" : { "type" : "number" }
+            },
+            "required" : [],
+            "additionalProperties" : false
+        },
+        "metadata" : {
+            "type" : "object",
+            "items" : {
+                "execution_error" : { "type" : "string" },
+                "module" : { "type" : "string" },
+                "action" : { "type" : "string" },
+                "start" : { "type" : "string" },
+                "end" : { "type" : "string" }
+            },
+            "required" : ["execution_error", "module", "action", "start"],
+            "additionalProperties" : false
     },
-    "required" : ["transaction_id", "id", "description"],
+    "required" : ["transaction_id", "id", "metadata"],
     "additionalProperties" : false
 }
 ```
@@ -221,8 +280,28 @@ described [here][1], plus the mandatory *transaction_id* field. The
 | name | type | description
 |------|------|------------
 | transaction_id | string | free format id of the request/response transaction
-| id | string | ID of the received request that originated the error
-| description | string | error description
+| id | string | free format id of the received request that originated the error
+| output | object | contains the action's output, if any
+| metadata | object | contains information about the execution of the requested action
+
+Description of *output* entries
+
+| name | type | description
+|------|------|------------
+| stdout | string | any output on stdout produced by the action (the agent does not validate it against the expected results' JSON schema)
+| stderr | string | any output on stderr produced by the action
+| exitcode | number | action's exit code
+
+The *metadata* entry has the same entries as the ones defined for the above
+response messages, with the additional *execution_error*:
+
+| name | type | description
+|------|------|------------
+| execution_error | string | any error reported by the agent during the execution of the action (mandatory)
+| module | string | the requested module
+| action | string | the requested module's action
+| start | string | optional - timestamp in ISO8601 format indicating when the action started
+| end | string | optional - timestamp in ISO8601 format indicating when the action completed
 
 ### Error Handling
 
@@ -231,10 +310,11 @@ The agent should reply with an *RPC error message* in case of:
  - unknown action
  - failure when starting the action execution
  - failure during the action execution
+ - action's results on stdout don't are not validated against the action's results JSON schema
 
-The agent should reply with an *PCP error message* in case of:
- - no data content
- - invalid data content
+The agent should reply with a *PCP error message* in case of:
+ - the request does not contain any data content
+ - the request contains invalid data content
 Note that in such cases, it is not possible to retrieve a *transaction_id* and
 create an *RPC error message*.
 
