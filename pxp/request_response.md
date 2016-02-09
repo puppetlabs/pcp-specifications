@@ -136,7 +136,7 @@ provides more information about the action outcome.
         "transaction_id" : { "type" : "string" },
         "output" : {
             "type" : "object",
-            "items" : {
+            "properties" : {
                 "stdout" : { "description" : "results in an action-specific format" },
                 "stderr" : { "type" : "string" },
                 "exitcode" : { "type" : "number" }
@@ -146,7 +146,7 @@ provides more information about the action outcome.
         },
         "metadata" : {
             "type" : "object",
-            "items" : {
+            "properties" : {
                 "module" : { "type" : "string" },
                 "action" : { "type" : "string" },
                 "start" : { "type" : "string" },
@@ -252,7 +252,7 @@ The format is:
         "id" : { "type" : "string" },
         "output" : {
             "type" : "object",
-            "items" : {
+            "properties" : {
                 "stdout" : { "type" : "string" },
                 "stderr" : { "type" : "string" },
                 "exitcode" : { "type" : "number" }
@@ -262,7 +262,7 @@ The format is:
         },
         "metadata" : {
             "type" : "object",
-            "items" : {
+            "properties" : {
                 "execution_error" : { "type" : "string" },
                 "module" : { "type" : "string" },
                 "action" : { "type" : "string" },
