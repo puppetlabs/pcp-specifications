@@ -45,7 +45,7 @@ Association response messages are described by the following JSON schema:
 }
 ```
 These fields are described as:
-          
+
 | name | type | description
 |------|------|------------
 | id | string | message id of the related request
@@ -56,8 +56,7 @@ Error Message
 ---
 
 Association error messages must conform with the format described in the
-[error handling][2] section. The *message_type* entry of the JSON data `content`
-must be equal to the respective association schema, mentioned above.
+[error handling][2] section.
 
 Broker Operation
 ---
