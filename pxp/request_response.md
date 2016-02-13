@@ -271,6 +271,7 @@ The format is:
             },
             "required" : ["execution_error", "module", "action", "start"],
             "additionalProperties" : false
+        }
     },
     "required" : ["transaction_id", "id", "metadata"],
     "additionalProperties" : false
