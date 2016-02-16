@@ -10,5 +10,5 @@ This repository describes:
 
 [pcp_1_0]: pcp/versions/1.0/README.md
 [pcp_next]: pcp/versions/next/README.md
-[pcp_1_0]: pxp/versions/1.0/README.md
-[pcp_next]: pxp/versions/next/README.md
+[pxp_1_0]: pxp/versions/1.0/README.md
+[pxp_next]: pxp/versions/next/README.md
