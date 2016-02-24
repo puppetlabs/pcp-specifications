@@ -163,14 +163,13 @@ its schema is action-specific. *transaction_id* is the other required entry.
 ##### Non-blocking Response (not in scope for Ankeny)
 
 The results of the requested action should be included in the *results* object;
-its schema is action-specific. *transaction_id* and *job_id* are the other
-required entries.
+its schema is action-specific. *transaction_id* in the only other required
+entry.
 
 ```
 {
     "properties" : {
         "transaction_id" : { "type" : "string" },
-        "job_id" : { "type" : "string" },
         "results" : { "type" : "object" }
     },
     "required" : ["transaction_id", "job_id", "results"],
@@ -181,7 +180,6 @@ required entries.
 | name | type | description
 |------|------|------------
 | transaction_id | string | free format id of the request/response transaction
-| job_id | string | reference to the execution job of the requested action
 | results | object | action results in action-specific format
 
 ##### Provisional Response
