@@ -72,7 +72,7 @@ The `puppet run` job terminates (4) and, since **C** requested to be notified
 with the outcome of the job (*notify_outcome* was flagged in the
 *non-blocking request* message), **A** sends back to **C** a
 *non-blocking response* containing the job output and possible errors of the
-executed action (5) (the final non-blocking response is not is scope for Ankeny).
+executed action (5).
 
 ### Message types
 
@@ -155,16 +155,15 @@ its schema is action-specific. *transaction_id* is the other required entry.
 | name | type | description
 |------|------|------------
 | transaction_id | string | free format id of the request/response transaction
-| notify_outcome | bool | if true, the agent must send a response containing the action outcome, once its execution completes (not is scope for Ankeny)
+| notify_outcome | bool | if true, the agent must send a non-blocking response containing the action outcome, once its execution completes
 | module | string | name of the module that includes the requested action
 | action | string | name of the requested action withing its submodule
 | params | object | input parameters (optional)
 
-##### Non-blocking Response (not in scope for Ankeny)
+##### Non-blocking Response
 
 The results of the requested action should be included in the *results* object;
-its schema is action-specific. *transaction_id* in the only other required
-entry.
+its schema is action-specific. *transaction_id* is the other required entry.
 
 ```
 {
