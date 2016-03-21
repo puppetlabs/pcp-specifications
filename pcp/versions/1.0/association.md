@@ -79,7 +79,8 @@ Client Operation
 ---
 
 Clients must be able to process association responses and change their status
-accordingly.
+accordingly. A client must consider its session with the broker as associated
+only after receiving a successful Associate Response.
 
 In case a client wants a persistent session, it should monitor the
 state of the wire layer connection and attempt to re-establish it if necessary.
