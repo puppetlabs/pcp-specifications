@@ -31,7 +31,7 @@ JSON schema:
         "sender" : { "type" : "string",
                      "pattern" : "^pcp://[^/]*/[^/]+$" },
         "destination_report" : { "type" : "bool" },
-        "in-reply-to" : { "type" : "string" }
+        "in_reply_to" : { "type" : "string" }
     },
     "required" : ["id", "message_type", "expires", "targets", "sender"],
     "additionalProperties" : false
@@ -46,7 +46,7 @@ JSON schema:
 | targets | array | list of PCP URIs (string items) indicating the recipients
 | sender | string | PCP URI indicating the endpoint node (broker or client node) that sent the message
 | destination_report | bool | if set to true broker must respond with a list of URI's that include all targets for a message |
-| in-reply-to | string | the ID of the received message to which this is a reply |
+| in_reply_to | string | the ID of the received message to which this is a reply |
 
 ### Data Chunk
 
