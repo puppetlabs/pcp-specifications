@@ -19,9 +19,10 @@ Index
 - [Message Delivery][33] - how the fabric processes and delivers client messages
 - [Destination Report][34] - how the fabric reports the receivers of a message
 - [Error Handling][35] - error handling
-- [Message Expiration][36] - how the fabric reports expired messages
-- [Delivery Guarantees][37] - how the fabric guarantees the delivery of messages
-- [Message Versioning][38] - how the fabric handles message versions
+- [Delivery Authorization][36] - how the fabric reports message delivery authorization failures
+- [Message Expiration][37] - how the fabric reports expired messages
+- [Delivery Guarantees][38] - how the fabric guarantees the delivery of messages
+- [Message Versioning][39] - how the fabric handles message versions
 
 Implementations
 ----
@@ -46,9 +47,10 @@ WebSockets as the underlying wire protocol.
 [33]: delivery.md
 [34]: destination_report.md
 [35]: error_handling.md
-[36]: ttl_expired.md
-[37]: delivery_guarantees.md
-[38]: versioning.md
+[36]: unauthorized.md
+[37]: ttl_expired.md
+[38]: delivery_guarantees.md
+[39]: versioning.md
 [41]: https://github.com/puppetlabs/pcp-broker
 [42]: https://github.com/puppetlabs/cpp-pcp-client
 [43]: https://github.com/puppetlabs/pxp-agent
