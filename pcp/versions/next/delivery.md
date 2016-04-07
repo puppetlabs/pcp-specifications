@@ -107,9 +107,16 @@ containing the list of URIs it will be sending the message to in the Data Chunk.
 The *destination_report* flag is ignored in case of [inventory requests][2],
 which are addressed directly to the broker.
 
+#### Delivery Authorization
+
+The broker must notify the sender with an [unauthorized][6] message in case
+a sender's message fails authorization. The broker must not deliver the
+message to any clients in such case, even if the message delivery to a subset
+of the original targets is authorized.
+
 #### Message Expiration
 
-The broker must notify the sender of an expired message with a [TTL expired][6]
+The broker must notify the sender of an expired message with a [TTL expired][7]
 message.
 
 #### Error handling
@@ -142,4 +149,5 @@ following items:
 [3]: message.md
 [4]: error_handling.md
 [5]: destination_report.md
-[6]: ttl_expired.md
+[6]: unauthorized.md
+[7]: ttl_expired.md
