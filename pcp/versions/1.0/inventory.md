@@ -7,9 +7,9 @@ registered in the messaging fabric.
 Message Flow
 ---
 
-A client node that wants an inventory list of a PCP broker must 1) be
-registered to it (refer to the [login][1] transaction) and 2) send an inventory
-request message to a PCP broker.
+A client node that wants an inventory list of a PCP broker must 1) establish
+a session with that broker (refer to the [association][1] section) and 2) send
+an inventory request message to it.
 
 In case the request is processed successfully, the broker will reply with an
 inventory response message.
@@ -65,5 +65,5 @@ Server Operation
 The broker must expand the wildcard and determine the list of URI's of all matching
 clients.
 
-[1]: registration.md
+[1]: association.md
 [2]: error_handling.md
