@@ -1,9 +1,10 @@
 Session Association
 ===
 
-PCP clients must associate their session with a broker before they can use
-its capabilities. Session Association is the process of establishing a connection
-between a client and broker and the broker associating a client URI with that connection.
+PCP clients must associate their underlying wire layer connection with a broker
+before they can use PCP capabilities. Session Association is the process of
+establishing a connection between a client and broker and the broker associating
+a client URI with that connection.
 
 This is done by completing a successful _associate_ transaction.
 
@@ -11,27 +12,21 @@ Association Message Flow
 ---
 
 A client that wants to establish a session with a broker must 1) establish the
-underlying wire layer connection (e.g. WebSocket) and 2) send a *associate request*
-message to that PCP broker.
+underlying wire layer connection (e.g. WebSocket) and 2) send an *Associate Request*
+message to that PCP broker. The broker will then 3) reply with an
+*Associate Response*, indicating the outcome of the Session Association.
 
-In case the request is processed successfully, the broker will reply with a
-*associate response* message. The broker may ignore the request or reply with an
-*error message* in case of node identity mismatch (see
-[Broker Operation](#broker-operation)).
-
-Should a session already be associated with the given client URI, the broker
-should disconnect the older connection, and consider the newly-associated
-session to be authoritative for that URI.
+We describe how the broker must handle the Session Association in the
+[Broker Operation](#broker-operation)) section below.
 
 Associate Messages
 ---
 
-*Associate request* and *response* messages must have the envelope *message_type*
+*Associate Request* and *Response* messages must have the envelope *message_type*
 entry respectively equal to `http://puppetlabs.com/associate_request` and
-`http://puppetlabs.com/associate_response`. An Associate request message does not
-require a Data Chunk.
-
-Association response messages are described by the following JSON schema:
+`http://puppetlabs.com/associate_response`. Associate Requests don't
+have a Data Chunk, whereas Associate Responses are described by the following
+JSON schema:
 
 ```json
 {
@@ -52,38 +47,84 @@ These fields are described as:
 | success | boolean | whether the session association was successful
 | reason | string | reason why a association failed (optional)
 
-Error Message
----
-
-Association error messages must conform with the format described in the
-[error handling][2] section.
 
 Broker Operation
 ---
 
-Once an association request is received, the broker must extract the common name
-from the client SSL certificate, the one used to establish the underlying connection.
-The broker will then match the certificate ID against the node identity indicated in
-the *sender* URI of the request envelope. In case of mismatch, the broker must
-reply with an error message, as described in the above section.
+#### During Session Association
 
-In case the underlying wire connection drops, the broker must guarantee that the
-client will be disassociated, meaning that the client URI will no longer map to
-its underlying connection (e.g. WebSocket connection).
+If the broker receives a malformed PCP message during the Session Association
+with a given client (i.e. the client's connection is not associated yet), it
+must reply with an *Error Message*, as described in the [error handling][2]
+section.
+
+The broker must drop all PCP messages other than *Associate Requests* that are
+sent by not associated clients.
+
+The broker must authenticate *Associate Requests* as any other PCP message. That
+is accomplished by extracting the common name from the client SSL certificate
+(the one used to establish the underlying secure connection) and then matching
+it against the node identity indicated in the *sender* URI of the request's
+envelope.
+
+The broker may also employ a mechanism for authorizing clients' association; if
+so, such mechanism is entirely implementation-specific.
+
+In case of authentication or authorization failure, the broker must reply with
+an unsuccessful (*success* set to false) *Associate Response* and close the
+underlying wire layer connection.
+
+When processing an expired *Associate Request*, the broker must reply with a
+*TTL expired*, as described in the relevant [section][3].
+
+If the broker receives an *Associate Request* from a client that is already
+associated on a different underlying wire layer connection, the broker must
+supersede the old connection if the new request succeeds. In practice, if the
+broker authenticates (and authorizes) the new *Associate Request*, it must reply
+with a successful *Associate Response* and close the old connection.
+
+The broker must ensure that the Session Association is completed before a given
+time point after the underlying wire layer connection is established; such
+timeout is implementation-specific.
+
+##### After a successful Session Association
 
 The broker must keep track of the associated clients and must be
 able to obtain the current status of their wire connections. That is necessary
 in order to perform delivery and inventory operations.
 
+If an *Associate Request* is sent by a client that is already associated, the
+broker must reply with a successful *Associate Response*; the client should
+remain associated with the broker.
+
+In case the underlying wire connection drops, the broker must guarantee that the
+client will be disassociated, meaning that the client URI will no longer map to
+its underlying connection (e.g. WebSocket connection).
+
 Client Operation
 ---
 
-Clients must be able to process association responses and change their status
-accordingly. A client must consider its session with the broker as associated
-only after receiving a successful Associate Response.
+Clients must be able to process *Association Responses*, *Error Messages*, and
+*TTL Expired* messages in the context of the _associate_ transaction; clients
+must change their status accordingly and retry the Session Association if
+necessary (after a network error or timeout, for instance). A client must
+consider its session with the broker as associated only after receiving a
+successful *Associate Response* (with Data Content's *success* flagged).
+
+During Session Association, a client should correlate received *Error Message*
+and *TTL Expired* messages with the *Associate Request* it sent; that should be
+done by matching the request's *ID* with the one indicated in the broker's
+reply.
+
+In case the broker replies with an *Error Message* after a broken
+*Associate Request*, the reply may not include *id* of the broken request so
+that it's not possible for the client to correlate such message with the
+*Associate Request*; in that case, the client must retry the _associate_
+transaction.
 
 In case a client wants a persistent session, it should monitor the
-state of the wire layer connection and attempt to re-establish it if necessary.
+state of the wire layer connection and attempt to re-associate if necessary.
 
 [1]: uri.md
 [2]: error_handling.md
+[3]: ttl_expired.md
