@@ -91,7 +91,7 @@ The broker must ensure that the Session Association is completed before a given
 time point after the underlying wire layer connection is established; such
 timeout is implementation-specific.
 
-##### After a successful Session Association
+#### After a successful Session Association
 
 The broker must keep track of the associated clients and must be
 able to obtain the current status of their wire connections. That is necessary
