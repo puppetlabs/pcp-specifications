@@ -73,22 +73,7 @@ A.
 A `version_error` message must have the envelope *message_type* equal to
 `http://puppetlabs.com/version_error`.
 
-The data content is described by the following JSON schema:
+The *in_reply_to* field of the *version_error* contains the ID of the
+message that prompted that error.
 
-```
-{
-    "properties" : {
-        "id" : { "type" : string" },
-        "target" : { "type" : "string" },
-        "reason" : { "type" : "string" }
-    },
-    "required" : ["id", "target", "reason"],
-    "additionalProperties" : false
-}
-```
-
-| name | type | description
-|------|------|------------
-| id | string | id of the message this message is in response to
-| target | string | PCP URI the message was targeted at
-| reason | string | reason a version_error message was sent
+The *data* field is a string describing the reason the *version_error* was sent.

@@ -4,24 +4,11 @@ Error Messages
 When an invalid or undeliverable message has been sent to a broker, the broker
 must respond with an error message.
 
-The *data* entry of error messages are described by the following json-schema:
+The *in_reply_to* field of the error message contains the ID of the message
+that prompted that error.
 
-```
-{
-    "properties" : {
-        "id" : { "type" : "string" },
-        "description" : { "type" : "string" }
-    },
-    "required" : ["description"],
-    "additionalProperties" : false
-}
-```
+The *data* field of error messages is a string description.
 
-| name | type | description
-|------|------|------------
-| id | string | ID of the received message that originated the error (optional)
-| description | string | error description
-
-An error message must have the *message_type* entry equal to:
+An error message must have the *message_type* field equal to:
 
 `http://puppetlabs.com/error_message`

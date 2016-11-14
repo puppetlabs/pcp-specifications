@@ -18,8 +18,9 @@ Index
 - [Inventory][32] - inventory service and transaction
 - [Message Delivery][33] - how the fabric processes and delivers client messages
 - [Error Handling][34] - error handling
-- [Delivery Guarantees][35] - how the fabric guarantees the delivery of messages
-- [Message Versioning][36] - how the fabric handles message versions
+- [Delivery Authorization][35] - how the fabric reports message delivery authorization failures
+- [Delivery Guarantees][36] - how the fabric guarantees the delivery of messages
+- [Message Versioning][37] - how the fabric handles message versions
 
 Implementations
 ----
@@ -40,8 +41,9 @@ WebSockets as the underlying wire protocol.
 [32]: inventory.md
 [33]: delivery.md
 [34]: error_handling.md
-[35]: delivery_guarantees.md
-[36]: versioning.md
+[35]: unauthorized.md
+[36]: delivery_guarantees.md
+[37]: versioning.md
 [41]: https://github.com/puppetlabs/pcp-broker
 [42]: https://github.com/puppetlabs/cpp-pcp-client
 [43]: https://github.com/puppetlabs/pxp-agent
