@@ -18,10 +18,13 @@ Inventory Messages
 ---
 
 Inventory request and response messages must have the *message_type*
-entry respectively equal to `http://puppetlabs.com/inventory_request` and
+field respectively equal to `http://puppetlabs.com/inventory_request` and
 `http://puppetlabs.com/inventory_response`.
 
-The *data* entry of an inventory request message is an array of URIs,
+The *in_reply_to* field of an inventory response contains the ID of the
+inventory request.
+
+The *data* field of an inventory request message is an array of URIs,
 described by the following json-schema:
 
 ```
@@ -32,7 +35,7 @@ described by the following json-schema:
 }
 ```
 
-The *data* entry of an inventory response message is an array of URIs,
+The *data* field of an inventory response message is an array of URIs,
 described by the same json-schema.
 
 Wildcard URI's
@@ -60,7 +63,7 @@ Error Handling
 
 In case of an error during the processing of the inventory list, the broker must
 reply with an error message as described in the [error handling][2] section.
-The *message_type* entry of the JSON data `content` must be equal to the
+The *message_type* field of the JSON data `content` must be equal to the
 inventory request one mentioned above.
 
 Server Operation

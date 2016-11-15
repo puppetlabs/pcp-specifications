@@ -63,14 +63,21 @@ From the above examples, it is clear that PCP Brokers must perform a number of
 operations to deliver a message. In this section we describe the operation
 requirements for the broker.
 
+#### Delivery Authorization
+
+The broker must notify the sender with an [unauthorized][4] message in case
+a sender's message fails authorization. The broker must not deliver the
+message in such case.
+
 #### Error handling
 
 The broker must respond to a client with an [error message][2] in case:
 
 - the message cannot be parsed (see [message][3])
 - the message does not match the message schema (see [message][3])
-- the recipient of the *target* entry is not registered in the broker
+- the recipient of the *target* field is not registered in the broker
 
 [1]: inventory.md
 [2]: error_handling.md
 [3]: message.md
+[4]: unauthorized.md
