@@ -1,7 +1,7 @@
 PCP Messages
 ===
 
-PCP messages are a JSON object.
+PCP messages are JSON objects.
 
 The content of an envelope is a JSON document that must match the following
 JSON schema:
