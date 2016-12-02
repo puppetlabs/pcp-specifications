@@ -67,7 +67,7 @@ occurred on the inventory since broker startup.
 For inventory updates:
 * The *message_type* field must equal `http://puppetlabs.com/inventory_update`
 * The *data* field must be a JSON map conforming to the following json-schema:
-  ```
+```
 {
   "properties": {
     "version": { "type": "integer"},
