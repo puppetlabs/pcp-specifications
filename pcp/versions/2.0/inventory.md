@@ -52,17 +52,12 @@ For inventory responses:
     "uris" : { "type" : "array",
                "items" : { "type" : "string",
                            "pattern" : "^pcp://[^/]*/[^/]+$" }
-    },
-    "version": { "type": "integer"}
+    }
   },
-  "required" : ["uris", "version"],
+  "required" : ["uris"],
   "additionalProperties" : false
 }
 ```
-
-In reference to the schema above, the `version` field is an interger equal to
-the number of changes (client connections and disconnections) that have
-occurred on the inventory since broker startup.
 
 For inventory updates:
 * The *message_type* field must equal `http://puppetlabs.com/inventory_update`
@@ -70,7 +65,6 @@ For inventory updates:
 ```
 {
   "properties": {
-    "version": { "type": "integer"},
     "changes": { "type": "array",
                  "items": {
                   "properties": {
@@ -80,19 +74,14 @@ For inventory updates:
                                 "description": "A representation of a connection or disconnection. 1 for connection, -1 for disconnection"}
                   }
                 }
-    }
-  }
-  "required": ["changes", "version"],
+  "required": ["changes"],
   "additionalProperties": false
 }
 ```
 
-In the schema above, the `version` field is as described in the "inventory
-responses" section. The `changes` field is specified as an array so that
+In the schema above, the `changes` field is specified as an array so that
 inventory updates may batch multiple changes to reduce network chatter.
-Batching is optional and the batching stragegy is up to the implementation. The
-version reflected in an inventory update message must equal the inventory
-version *prior* to the accompanying list of changes.
+Batching is optional and the batching strategy is up to the implementation.
 
 
 Wildcard URI's
