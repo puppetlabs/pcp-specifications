@@ -171,7 +171,7 @@ its schema is action-specific. *transaction_id* is the other required entry.
         "transaction_id" : { "type" : "string" },
         "results" : { "type" : "object" }
     },
-    "required" : ["transaction_id", "job_id", "results"],
+    "required" : ["transaction_id", "results"],
     "additionalProperties" : false
 }
 ```
