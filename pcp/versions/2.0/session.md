@@ -22,6 +22,9 @@ Should a session already be associated with the given [client URI][1], the
 broker should disconnect the older connection, and consider the
 newly-associated session to be authoritative for that URI.
 
+A session ends when the connection is lost. Inventory subscriptions are not
+maintained across sessions.
+
 Broker Operation
 ---
 
